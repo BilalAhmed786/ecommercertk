@@ -1,0 +1,24 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "3001:3001"
+    env_file:
+      - ./backend/.env
+    networks:
+      - ecommerce-network
+    depends_on:
+      - frontend
+
+  frontend:
+    build:
+      context: ./ecommerce
+    ports:
+      - "80:80"
+    networks:
+      - ecommerce-network
+
+networks:
+  ecommerce-network:
+   

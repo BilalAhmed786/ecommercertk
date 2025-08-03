@@ -1,0 +1,36 @@
+.welcome-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Important for vertical centering */
+  background-color: #eedbdb;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* The actual welcome message card */
+.welcome-message {
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 450px;
+  width: 100%;
+}
+
+.welcome-message h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.welcome-message span {
+  color: #007bff;
+}
+
+.welcome-message p {
+  font-size: 1.1rem;
+  color: #666;
+}

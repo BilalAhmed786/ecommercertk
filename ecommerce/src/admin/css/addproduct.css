@@ -1,0 +1,52 @@
+
+
+#loadFileXml,
+#loadFileimage {
+  display: block;
+  margin: 1rem auto;
+}
+
+#previewimage {
+  margin-top: 0.5rem;
+  background: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.proimage{
+
+    display: flex;
+
+}
+
+.galleryimgs {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+#gallerypreview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.btn-imagegallery {
+  position: relative;
+  padding: 2px 6px;
+  top:-20px;
+  background-color: red;
+  color: white;
+  font-size: 0.75rem;
+  border: none;
+  cursor: pointer;
+  margin-left: auto;
+}

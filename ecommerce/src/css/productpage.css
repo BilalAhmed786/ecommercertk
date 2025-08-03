@@ -1,0 +1,172 @@
+.productcontainer{
+
+  margin: 20px;
+
+}
+
+.productwraper{
+    display: flex;
+    width:100% ;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content:left;
+    gap:15px;
+}
+
+.productdetails {
+  display: block;
+  width:45%;
+  @media (max-width:750px) {
+    display: block;
+    width: 100%;
+  }
+
+}
+
+.prodesc{
+  text-align: justify; 
+  max-height:250px;
+  padding:5px;
+  overflow-y: auto;
+}
+
+.addtocart {
+  background-color: #e43a3a;
+  color: white;
+  outline:none;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+
+/*reviewform */
+
+.reviewform {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fdfdfd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
+.formreview {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formreview h4 {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.reviewinput,
+.reviewtextarea {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border 0.3s ease;
+}
+
+.reviewinput:focus,
+.reviewtextarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.15);
+}
+
+.reviewtextarea {
+  resize: vertical;
+}
+
+
+@media (max-width: 600px) {
+  .reviewform {
+    padding: 15px;
+  }
+
+  .formreview h4 {
+    font-size: 20px;
+  }
+
+  .reviewinput,
+  .reviewtextarea {
+    font-size: 15px;
+  }
+}
+
+/* //clientreviews */
+
+.client-reviews {
+  margin: 30px auto;
+  max-width: 700px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.reviews-heading {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.avg-rating {
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+}
+
+.total-comments {
+  text-align: center;
+  font-size: 15px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.review-card {
+  background: #fff;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #007bff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.reviewer-name {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.review-text {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #555;
+}
+
+@media (max-width: 600px) {
+  .client-reviews {
+    padding: 15px;
+  }
+
+  .reviews-heading {
+    font-size: 20px;
+  }
+
+  .review-card {
+    padding: 12px;
+  }
+
+  .review-text {
+    font-size: 14px;
+  }
+}

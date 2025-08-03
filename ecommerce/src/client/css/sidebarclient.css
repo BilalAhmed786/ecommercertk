@@ -1,0 +1,37 @@
+
+.clintmenu ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 40px;
+}
+
+.clintmenu li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  transition: background-color 0.3s;
+}
+
+.clintmenu li:hover {
+  background-color: #e5ecf3;
+  cursor: pointer;
+  
+}
+
+.menuitems {
+  color: rgb(6, 5, 5);
+  text-decoration: none;
+  
+}
+
+.menuitems:hover {
+  color: crimson;
+}
+
+.clintmenu li svg {
+  font-size: 18px;
+  color: rgb(0, 0, 0) !important;
+  min-width: 20px;
+}
+

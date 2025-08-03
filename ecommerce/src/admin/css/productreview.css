@@ -1,0 +1,76 @@
+/* Review Modal */
+.review-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  background: crimson;
+  color: white;
+  border: none;
+  width: 25px;
+  height: 25px;
+  font-size: 14px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.review-card h6 {
+  margin-bottom: 1rem;
+  color: #222;
+  font-size: 1.2rem;
+}
+
+.review-card p {
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.stars {
+  color: gold;
+  font-size: 1rem;
+}
+
+/* Comment block */
+.commentset {
+  background-color: #f1f1f1;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .selecteddeleteitem,
+  .statusbtn {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .review-card {
+    padding: 1.5rem;
+  }
+}

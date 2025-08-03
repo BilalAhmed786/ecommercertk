@@ -1,0 +1,199 @@
+.dashboardcontainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.marquee-container {
+  width: 100%;
+  padding: 20px;
+}
+
+.page-title,
+h5 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 2rem 0;
+  color: #333;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 20px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  padding: 5px 15px;
+  background-color: #fff;
+
+  @media (max-width: 768px) {
+
+    width: 90%;
+  }
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 16px;
+}
+
+.search-icon {
+  color: #888;
+  margin-left: 10px;
+}
+
+.action-icons svg {
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 1.2rem;
+  color: #3498db;
+  transition: color 0.3s ease;
+}
+
+/* Background overlay for modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* dim background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 998;
+}
+
+/* The modal itself */
+.modal-form {
+  background-color: white;
+  padding: 2rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  z-index: 999;
+}
+
+/* Close (X) button */
+.close-modal {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Input styling */
+.modal-input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.modal-form label {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.modal-form .btn-submit {
+  display: block;
+  margin-top: 1.2rem;
+  width: 100%;
+}
+
+.selecteddeleteitem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #ffecec;
+  border: 1px solid #f5c6cb;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: #c0392b;
+  width: fit-content;
+}
+
+.selecteddeleteitem a {
+  cursor: pointer;
+  color: #c0392b;
+  text-decoration: underline;
+}
+
+.statusbtn {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.status-form {
+
+  width:40%;
+  margin: auto; 
+}
+
+.status-form .status-btn {
+  flex: 1 1 10%;
+  min-width: 60px;
+  padding: 0.5rem;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.status-form .status {
+  flex: 1 1 20%;
+  min-width: 60px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .status-form {
+    flex-direction: column;
+  }
+
+  .status-form select{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+  }
+
+  
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  .status-form {
+    flex-direction: column;
+  }
+
+  .status-form select {
+    width: 140px;
+  }
+}
+
+
+
+.action-icons svg:hover {
+  color: #1d6fa5;
+}

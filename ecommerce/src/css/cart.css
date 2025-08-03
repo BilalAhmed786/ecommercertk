@@ -1,0 +1,142 @@
+.cartcontainer {
+  margin-top: 70px;
+  margin-bottom: 80px;
+}
+
+.carttable {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+
+
+.cartincbtnright,
+.cartincbtnleft {
+
+  background: none;
+  border: none;
+
+
+}
+
+.proceedcheckout {
+  display: block;
+  float: right;
+  margin-top: 45px;
+  margin-right: 70px;
+
+  @media (max-width:750px) {
+
+    margin-right: 14px;
+
+  }
+
+}
+
+/* carttable */
+
+.carttable th,
+.carttable td {
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 4px;
+
+  @media (max-width:750px) {
+
+    padding: 1px;
+  }
+}
+
+.carttable th {
+  background-color: #f2f2f2;
+}
+
+.cartviewtab {
+
+  background-color: rgb(255, 255, 255);
+  border: 2px solid lightgray;
+  border-radius: 5px;
+
+
+}
+
+.cartviewtab th {
+  background-color: #2b2929 !important;
+  color: white;
+  font-size: 16px;
+  padding: 10px;
+  border: none !important;
+}
+
+.cartviewtab td {
+  font-size: 15px;
+  font-family: sans-serif;
+  font-weight: 500;
+
+}
+
+
+.cartviewoptions {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  height: 50px;
+  background-color: #333;
+  color: white;
+  border-radius: 10px;
+}
+
+
+.btn-cartpreview {
+  color: white;
+  background-color: red;
+  padding: 3px 7px 3px 7px;
+  font-weight: 400;
+  font-family: sans-serif;
+  border-radius: 5px
+}
+
+
+.iconcontainer {
+  position: relative;
+  display: inline-block;
+
+}
+
+
+.cartpreview {
+  position: absolute;
+  right: 0;
+  top: 25px;
+  left: -570px;
+  width: 600px;
+  max-height: 400px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  pointer-events: none;
+
+  @media (max-width: 1080px) {
+
+    display: none !important;
+
+  }
+}
+
+
+.iconcontainer:hover .cartpreview {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}

@@ -1,0 +1,108 @@
+/* Wrapper layout */
+.dashboard-wrapper {
+  display: flex;
+  flex-direction: row;
+  background-color: #f9f9fb;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Main content area */
+.dashboard-main {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Welcome banner with marquee effect */
+.welcome-banner {
+  background-color: #edeff2;
+  color: rgb(7, 7, 7);
+  padding: 15px 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.marquee {
+  animation: scroll-left 10s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Responsive dashboard grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+/* Cards inside grid */
+.dashboard-card {
+  background-color: white;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  font-size: 18px;
+  font-weight: 600;
+  color: #212529;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.dashboard-card a {
+  text-decoration: none;
+  color: black;
+  width: 100%;
+}
+
+/* Hover effect */
+.dashboard-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+/* 🔥 Add responsive tweaks */
+@media (max-width: 768px) {
+  .dashboard-wrapper {
+    flex-direction: column;
+  }
+
+  .dashboard-main {
+    padding: 15px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-card {
+    padding: 20px 15px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-card {
+    padding: 16px 12px;
+    font-size: 15px;
+  }
+
+  .welcome-banner {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+}
