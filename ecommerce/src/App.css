@@ -27,14 +27,15 @@ code {
 }
 
 
+@media (max-width:575px) {
+    .recaptchacontain,
+    .g-recaptcha {
+        transform:scale(0.77);
+        transform-origin:0 0;
+        overflow: hidden;
 
- 
-  
- 
-  
-  
-  
-
+    }
+}
 
 
  

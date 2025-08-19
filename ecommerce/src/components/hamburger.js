@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from 'react-icons/fa';
 
-export default function Hamburger({ setIsOpen, toggleMenu, isOpen, Logout, userdata }) {
+export default function Hamburger({ setIsOpen, toggleMenu, isOpen,userdata,handleLogoutuser }) {
 
   return (
     <div className="hamburgercontainer">
@@ -36,7 +36,7 @@ export default function Hamburger({ setIsOpen, toggleMenu, isOpen, Logout, userd
             <li><Link className='menuheader' to="/dashboard">Dashboard</Link></li> }
             {userdata?.userrole === 'subscriber' &&
             <li> <Link className='menuheader' to="/client">Dashboard</Link></li>}
-            <li onClick={Logout}><Link>Logout</Link></li>
+            <li onClick={handleLogoutuser}><Link>Logout</Link></li>
           </>
         }
       </div>

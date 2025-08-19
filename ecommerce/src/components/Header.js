@@ -7,7 +7,7 @@ import { useLogoutUserMutation, useUserDetailsMutation } from '../app/apiauth';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import Hamburger from './hamburger';
 import Cartpreview from './Cartpreview';
-import { backendurl } from '../baseurl/baseurl';
+import { backendurl, frontendurl } from '../baseurl/baseurl';
 
 
 
@@ -28,9 +28,9 @@ function Header() {
 
   const handleLogoutuser = async () => {
 
-
     const logout = await logoutuser()
 
+  
     if (logout) {
 
       navigate('/login')
@@ -60,8 +60,10 @@ function Header() {
     <div className='headercontainer'>
       <div className='headercontent'>
         <div className='logocontainer'>
-          <div>
+          <div className='site-logo-contianer'>
+            <Link to={`${frontendurl}`}>
             <img className='site-logo' src={`${backendurl}/uploads/thrifter.png`} alt='Logo' />
+            </Link>
           </div>
           <div>
             {!userdata?.userrole ?
@@ -75,7 +77,7 @@ function Header() {
                   <li><Link to="/register" onClick={() => setRegister(false)}>Register</Link></li>
                 </div>
               </> :
-              <><FontAwesomeIcon style={{ cursor: 'pointer' }} onClick={handleLogoutuser} icon={faRightFromBracket} /></>
+              <><FontAwesomeIcon className='logouticon'  onClick={handleLogoutuser} icon={faRightFromBracket} /></>
 
             }
           </div>
@@ -90,8 +92,15 @@ function Header() {
         
           <div className="iconcontainer">
           <div className="iconsetup">
-            <FontAwesomeIcon className="carticon" icon={faShoppingBag} />
+           <Link to={`${frontendurl}/cart`}>
+            <FontAwesomeIcon
+              className="carticon"
+              icon={faShoppingBag} 
+            
+
+            />
             <span className="qunatity">{totalQuantity}</span>
+          </Link>
           </div>
 
           <div className="cartpreview">
@@ -99,7 +108,13 @@ function Header() {
           </div>
         </div>
      </div>
-     <Hamburger toggleMenu={toggleMenu} setIsOpen={setIsOpen} isOpen={isOpen} userdata={userdata} />
+      <Hamburger 
+        toggleMenu={toggleMenu} 
+        setIsOpen={setIsOpen} 
+        isOpen={isOpen}
+        userdata={userdata}
+        handleLogoutuser={handleLogoutuser}
+        />
     </div>
   );
 }

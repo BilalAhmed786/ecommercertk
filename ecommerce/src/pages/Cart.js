@@ -83,6 +83,7 @@ function Cart() {
                     <td><div><img style={{ width: 50 }} src={`${backendurl}/uploads/${item.productimage}`} alt='' /></div><div>{item.productname}</div></td>
                     <td>{item.saleprice}</td>
                     <td>
+                      <div className='cartQty'>
                       <button className='cartincbtnleft'  onClick={() => handleDecreaseQuantity(item._id)}>
                        -
                       </button>
@@ -93,6 +94,7 @@ function Cart() {
                        >
                         +
                       </button>
+                    </div>
                      </td>
                     <td><button style={{color:'red',background:'none',border:"none",cursor:'pointer'}} onClick={() => handleRemoveFromCart(item._id)}><FontAwesomeIcon icon={faTrashAlt} /></button></td>
                   </tr>

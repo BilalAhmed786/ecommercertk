@@ -96,11 +96,11 @@ function Login() {
                     />
                   </div>
 
-                  <div className="mb-3">
+                  <div className="recaptchacontain">
                     <ReCAPTCHA
                       sitekey="6LdmnpgrAAAAADTs17lZXUjIddY9oH5BGozYTdbK"
                       onChange={handleCaptchaChange}
-                      className="recaptchacontain"
+                      
                     />
                   </div>
 

@@ -12,6 +12,14 @@
 
 }
 
+@media (max-width:340px) {
+  .cartQty{
+
+    display: flex;
+    flex-direction: column;
+}
+  
+}
 
 
 .cartincbtnright,
