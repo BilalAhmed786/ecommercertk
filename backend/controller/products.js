@@ -655,42 +655,16 @@ const productsreviews = async (req, res) => {
 
     }
 
-    const user = await Productreview.find({ email: email })
-
-
-    if (user.length === 0) {
-
-
       const saveuser = new Productreview({ productid: id, rating, name, email, comment })
 
 
-      const newuser = await saveuser.save()
+         const reviewsaved =  await saveuser.save()
 
+              if(reviewsaved){
 
-      if (newuser) {
+                return res.json('comment ready for publish')
+              }
 
-        console.log('comment saved')
-        res.json('comment ready for publish')
-
-      } else {
-        console.log('somthing wrong happend')
-      }
-
-    } else {
-
-      const updatecomment = await Productreview.updateOne({ _id: user[0]._id }, { $set: { productid: id, rating, name, email, comment } })
-
-
-      if (updatecomment) {
-
-
-        console.log("comment updated")
-        res.json('comment ready for publish')
-      } else {
-
-        console.log("comment update fail")
-      }
-    }
   } catch (error) {
 
     console.log(error)
