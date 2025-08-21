@@ -139,7 +139,7 @@ function Productreviews() {
 
         {reviewFormVisible && (
           <div className="review-modal">
-            <div className="review-card">
+            <div className="view-review">
               <button className="close-btn" onClick={() => setReviewFormVisible(false)}>×</button>
               <h6>Client Review</h6>
               <p>{singleReview?.[0]?.name}</p>

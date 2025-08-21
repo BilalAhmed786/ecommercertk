@@ -1,23 +1,20 @@
 /* Review Modal */
 .review-modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 80%;
+  max-width: 500px; /* adjust as needed */
+ 
 }
-
-.review-card {
+.view-review{
+  position: relative;
   background: white;
   padding: 2rem;
   border-radius: 10px;
-  width: 90%;
-  max-width: 500px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  position: relative;
 }
 
 .close-btn {
