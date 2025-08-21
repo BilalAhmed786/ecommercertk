@@ -1,0 +1,41 @@
+
+.input-wrapper {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.input-box {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+
+.btn.add {
+  background: #28a745;
+  color: white;
+}
+
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  color:red;
+  cursor: pointer;
+}
+.edit-close{
+  background: transparent;
+  border: none;
+  outline: none;
+
+}
+.title-wraper{
+  display: flex;
+  justify-content: center;
+  gap:8px
+  
+}

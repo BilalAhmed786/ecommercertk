@@ -22,8 +22,6 @@ const Schema = new mongoose.Schema({
         required: true
     },
     galleryimages: {
-
-
         type: ['string'],
         required: true
     },

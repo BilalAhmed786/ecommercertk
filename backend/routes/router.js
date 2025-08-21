@@ -10,7 +10,7 @@ deletemultiplereviews,deletesinglereview,updatereviewstatus,deletegalleryimage} 
 const {alluser,singleuser,deleteuser,deletemultipleUser,updatesingleuser,searchuser,newsletter} = require('../controller/users');
 const{paymentmode,getorders,getsingleorder,removesingleorder,removemultipleorders,orderstatus}= require('../controller/orderadmin')
 const{getBillingaddress,updateBillingaddress,getclientorders,removeclientorders,removemultipleclientorder,getsingleclientorder}  =  require('../controller/clientorder');
-
+const {getfilterrange,addfilterrange,editfilterrange,deletefilterrange} = require('../controller/productfilter')
 
 
 
@@ -51,6 +51,11 @@ router.delete('/removeprod/:id',verification,userrole('admin'),removeprod)
 router.delete('/removemultipleprod',verification,userrole('admin'),removemultipleprod)
 router.post('/updateprod',upload.fields([{ name: 'imagesingle' }, { name: 'imagesmultiple' }]),updateprod)
 router.post('/deletegalleryimg',verification,userrole('admin'),deletegalleryimage)
+router.get('/getranges',getfilterrange)
+router.post('/addranges',verification,userrole('admin'),addfilterrange)
+router.post('/editranges',verification,userrole('admin'),editfilterrange)
+router.delete('/deleteranges/:id',verification,userrole('admin'),deletefilterrange)
+
 //admin access only
 //all register users for admin info
 router.get('/alluser',verification,userrole('admin'),alluser)

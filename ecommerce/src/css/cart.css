@@ -53,11 +53,14 @@
   text-align: center;
   padding: 4px;
 
-  @media (max-width:750px) {
-
-    padding: 1px;
   }
-}
+  @media (max-width:750px) {
+    .carttable th,
+    .carttable td{
+
+      padding: 1px;
+    }
+  }
 
 .carttable th {
   background-color: #f2f2f2;
@@ -134,12 +137,16 @@
   z-index: 1000;
   pointer-events: none;
 
-  @media (max-width: 1080px) {
+ 
+}
+ @media (max-width: 1080px) {
+
+  .cartpreview{
 
     display: none !important;
+  }
 
   }
-}
 
 
 .iconcontainer:hover .cartpreview {

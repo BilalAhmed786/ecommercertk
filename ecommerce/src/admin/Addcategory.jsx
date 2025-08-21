@@ -18,12 +18,15 @@ function Addcategory() {
     const [id, setId] = useState('');
     const [searchitem, statesearchpro] = useState('');
     const [productcat] = useSubmitProductCategeroyMutation();
+    const [selectedRows, setSelectedRows] = useState([]);
     const { data, refetch } = useGetProductCategeroyQuery(searchitem);
     const { data: singlecategory, refetch: singleCat } = useGetsingleProductCategeroyQuery(id);
     const [updateproCat] = useUpdateProductCategeroyMutation();
     const [deleteproCat] = useDeleteProductCategeroyMutation();
     const [productcatval, stateproductcatval] = useState({ productcat: '' });
     const [singleupdatedata, singlecatupdate] = useState({ productcat: '' });
+
+
 
     useEffect(() => {
         if (singlecategory) {
@@ -56,10 +59,25 @@ function Addcategory() {
         }
     };
 
+    const handleDeleteSelected = async()=> {
+    for (const row of selectedRows) {
+      await deleteproCat(row._id)
+      refetch()
+    }
+    setSelectedRows([]); // clear selection
+  }
+
+
+
     const editHandle = (id) => {
         setId(id);
         statemodeform(true);
         singleCat();
+    };
+
+    const handleRowSelected = (rows) => {
+
+        setSelectedRows(rows.selectedRows);
     };
 
     const updatecatHandle = async (e) => {
@@ -134,12 +152,16 @@ function Addcategory() {
             <div>
                 <Searchbar statesearchpro={statesearchpro} />
 
+                <div className="selecteddeleteitem">
+                    <a onClick={handleDeleteSelected}>Delete Selected</a>
+                    <div>({selectedRows.length})</div>
+                </div>
+
                 <ReuseDataTable
                     columns={columns}
                     data={data || []}
-                    pagination
-                    highlightOnHover
-                    dense
+                    selectedRows={selectedRows}
+                    onRowSelected={handleRowSelected}
                 />
             </div>
 

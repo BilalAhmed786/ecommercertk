@@ -15,9 +15,14 @@
   padding: 0 20px;
   box-sizing: border-box;
 
+}
+
   @media (max-width: 992px) {
 
-    grid-template-columns: repeat(2, 1fr);  
+    .footer-container{
+
+      grid-template-columns: repeat(2, 1fr);  
+    }
    
     .footer-column-1{
       grid-row-start: 1;
@@ -29,14 +34,16 @@
 
   @media (max-width: 600px) {
 
+    .footer-container{
+
     grid-template-columns: 1fr;
+  } 
    
     .footer-column-1{
       grid-row: auto;
     }
 
   }
-}
 
 .footer-column-1,
 .footer-column-2,

@@ -16,6 +16,7 @@ import './admin/css/addproduct.css'
 import './admin/css/productreview.css'
 import './admin/css/orderreview.css'
 import './admin/css/addcategory.css'
+import  './admin/css/productfilter.css'
 import './client/css/welcome.css'
 import './client/css/sidebarclient.css'
 import './client/css/orderreview.css'
@@ -49,13 +50,14 @@ import Allusers from './admin/Allusers';
 import AuthProcted from './protected/authProcted';
 import Allproducts from './admin/Allproducts';
 import Editproduct from './admin/Editproduct';
+import Productfilter from './admin/productfilter';
 import Productreviews from './admin/Productreviews';
 import Orders from './admin/Orders';
 import Orderview from './admin/Orderview';
 import Changepassword from './admin/Changepassword';
 import Clientorders from './client/Clientorders';
 import Clientordersview from './client/Clientordersview';
-import Testcomponent from './admin/Testcomponent';
+
 
 
 
@@ -90,8 +92,8 @@ function App() {
             <Route path="/alluser" element={<Protected Component={Allusers} />} />
             <Route path="/productreviews" element={<Protected Component={Productreviews} />} />
             <Route path="/allproducts" element={<Protected Component={Allproducts} />} />
-            <Route path="/allproducts/:id" element={<Editproduct />} />
-            <Route path="/testcomponent/" element={<Protected Component={Testcomponent} />} />
+            <Route path="/allproducts/:id" element={<Protected Component={Editproduct} />} />
+            <Route path="/productfilter" element={<Protected Component={Productfilter} />} />
             <Route path="/changepass" element={<Protected Component={Changepassword} />} />
             <Route path="/client" element={< ClientProtected Component={Welcome} />} />
             <Route path="/Profile" element={< ClientProtected Component={Profile} />} />

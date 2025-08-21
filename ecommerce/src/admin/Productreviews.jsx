@@ -51,7 +51,7 @@ function Productreviews() {
   };
 
   const handleRowSelected = (rows) => {
-    console.log(rows)
+    
     setSelectedRows(rows.selectedRows.map((row) => row._id));
   };
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faUser, faShoppingBag, faPlus, faTruck, faFolderOpen, faRubleSign, faClipboardList, faKey, faStar as regularStar } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faUser,faFilter, faShoppingBag, faPlus, faTruck, faFolderOpen, faRubleSign, faClipboardList, faKey, faStar as regularStar } from '@fortawesome/free-solid-svg-icons';
 import { useAllOrdersforadminQuery } from '../../app/apiorders';
 import { useGetReviewsforadminQuery } from '../../app/apiproducts';
 function Sidebarmenu() {
@@ -58,6 +58,7 @@ function Sidebarmenu() {
           <li><FontAwesomeIcon icon={faUser} /><Link to='/alluser'>All User</Link></li>
           <li><FontAwesomeIcon icon={faShoppingBag} /><Link to='/allproducts'>Products</Link></li>
           <li><FontAwesomeIcon icon={faPlus} /><Link to='/addproduct'>Add Product</Link></li>
+          <li><FontAwesomeIcon icon={faFilter} /><Link to='/productfilter'>Product Filter</Link></li>
           <li><FontAwesomeIcon icon={regularStar} /><Link to='/productreviews'>Product Reviews</Link>{reviewpend() > 0 && <span className='tag'>{reviewpend()}</span>}</li>
           <li><FontAwesomeIcon icon={faClipboardList} /><Link to='/orders'>Orders</Link>{orderpend() > 0 && <span className='tag'>{orderpend()}</span>}</li>
           <li><FontAwesomeIcon icon={faFolderOpen} /><Link to='/addcategory'>Categories</Link></li>

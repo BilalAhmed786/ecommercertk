@@ -609,25 +609,26 @@ const updateprod = async (req, res) => {
 
    
     if (galleryimages.length > 0) {
-      const product = await Products.findById(productid);
-      if (product?.galleryimages?.length > 0) {
-        product.galleryimages.forEach((img) => {
-          const oldGalleryPath = path.join(__dirname, `../public/uploads/${img}`);
-          fs.unlink(oldGalleryPath, (err) => {
-            if (err) console.error('Error deleting gallery image:', err);
-            else console.log('Gallery image deleted');
-          });
-        });
-      }
-      updateFields.galleryimages = galleryimages;
+      var product = await Products.findById(productid);
+   
+       product.galleryimages = [
+          ...new Set([...(product.galleryimages || []), ...galleryimages])
+      ];
+
+       await product.save();
+
     }
+
+    
 
     const productupdate = await Products.updateOne(
       { _id: productid },
       { $set: updateFields }
     );
 
-    if (productupdate.modifiedCount > 0) {
+     
+
+    if (productupdate.modifiedCount > 0 || product) {
       return res.json(['product updated']);
     } else {
       return res.json(['No changes were made']);
@@ -646,7 +647,6 @@ const productsreviews = async (req, res) => {
   try {
     const { id, rating, formdata: { name, email, comment } } = req.body
 
-    console.log(req.body)
 
     if (!name || !email || !comment || !rating) {
 

@@ -27,10 +27,13 @@ h5 {
   padding: 5px 15px;
   background-color: #fff;
 
-  @media (max-width: 768px) {
+}
 
+@media (max-width: 768px) {
+  .search-bar {
     width: 90%;
   }
+
 }
 
 .search-bar input {
@@ -143,8 +146,8 @@ h5 {
 
 .status-form {
 
-  width:40%;
-  margin: auto; 
+  width: 40%;
+  margin: auto;
 }
 
 .status-form .status-btn {
@@ -171,17 +174,18 @@ h5 {
     flex-direction: column;
   }
 
-  .status-form select{
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  resize: vertical;
+  .status-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
   }
 
-  
+
 }
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .status-form {
     flex-direction: column;

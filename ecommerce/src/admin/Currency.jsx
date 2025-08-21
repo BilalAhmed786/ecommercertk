@@ -9,7 +9,7 @@ function Currency() {
 
   const { data, isLoading, refetch } = useGetCurrencyQuery()
 
-  console.log(data)
+
 
   useEffect(() => {
 

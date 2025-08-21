@@ -1,5 +1,4 @@
-import { useState } from 'react';
-
+import { useGetRangeQuery } from '../app/productfilter';
 const Sidebar = ({
   setCategory,
   saleprice,
@@ -12,6 +11,9 @@ const Sidebar = ({
   handleFiltersChange
 }) => {
   
+
+
+  const {data,isLoading} = useGetRangeQuery()
 
 
 
@@ -47,11 +49,13 @@ const Sidebar = ({
               className='filter-select'
               onChange={(e) => setPrice(e.target.value)}
             >
-              <option value=''>All</option>
-              <option value='0-50'>0-50</option>
-              <option value='50-100'>50-100</option>
-              <option value='100-200'>100-200</option>
-            </select>
+              <option  value=''>All</option>
+            {data?.map((ranges,index)=>(
+              
+              <option key={index} value={ranges.range}>{ranges.range}</option>
+            ))}
+            
+          </select>
           </li>
 
           <li className='filter-section'>

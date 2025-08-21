@@ -22,13 +22,15 @@
   justify-content: center;
   align-items: center;
 
+ }
   @media(max-width:1080px) {
 
-    display: none;
+    .navmenu{
+
+      display: none;
+    }
 
   }
-
-}
 
 .navmenu a {
   display: inline-block;
@@ -90,10 +92,13 @@
   top: 70px;
   list-style-type: none;
   z-index: 50;
+ }
   @media (max-width:1080px) {
-    display: block;
+   .dropdown-hamburger{
+
+     display: block;
+   }
   }
-}
 
 .dropdown-hamburger li {
   display: block;
@@ -131,11 +136,15 @@
   align-items: center;
   z-index: 50;
 
+}
+
   @media (max-width:1080px) {
 
-    display: none;
+    .userbutton{
+
+      display: none;
+    }
   }
-}
 
 
 .logouticon {

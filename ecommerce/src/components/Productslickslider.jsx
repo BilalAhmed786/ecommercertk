@@ -26,6 +26,7 @@ function ProductSlider({ images }) {
   return (
     <div className="productslider-wrapper">
       <div className='listslidewraper'>
+        
         <div className="thumbnail-list">
           {images.map((img, index) => (
             <div

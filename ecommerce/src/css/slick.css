@@ -12,13 +12,14 @@ img.imgcrousel {
   padding: 5px;
 
 }
+
 @media (max-width:1090px) {
-  
-  .slick-slide img{
+
+  .slick-slide img {
     display: block;
     width: 90% !important;
-    
-}
+
+  }
 
 }
 
@@ -31,8 +32,8 @@ img.imgcrousel {
   justify-content: center;
   gap: 2px;
   align-items: center;
+  max-width: 900px;
  
-  max-width:900px;
 }
 
 .listslidewraper {
@@ -40,26 +41,45 @@ img.imgcrousel {
   display: flex;
   flex-wrap: wrap-reverse;
   justify-content: center;
+
 }
+
+
 
 .thumbnail-list {
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  height: 400px;
+  overflow: auto;
   gap: 10px;
-    @media (max-width:590px) {
+
+}
+
+@media (max-width:590px) {
+  .thumbnail-list {
     flex-direction: row;
+    height: auto;
+    width: 320px;      
     overflow-x: auto;
+    overflow-y: hidden;
+    gap: 5px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .thumb-img {
+   flex-shrink: 0;
+   
   }
 }
+
+
+
 
 .thumb-img {
   width: 100px;
   height: 100px;
   border: 2px solid transparent;
   cursor: pointer;
-
-
 }
 
 .thumb-img img {
@@ -76,20 +96,27 @@ img.imgcrousel {
 
 .main-slider {
   width: 400px;
-  @media (max-width: 767px) {
-    display: block;
+
+}
+
+@media (max-width: 767px) {
+  .main-slider {
     width: 350px;
     margin: auto;
+
   }
 
-  @media (min-width: 768px) and (max-width: 1024px) {
+}
 
+@media (min-width: 768px) and (max-width: 1024px) {
+  .main-slider {
     width: 400px;
     height: 500px;
     margin: auto;
     object-fit: cover;
-  
-}
+
+  }
+
 }
 
 .main-slider img {
@@ -99,23 +126,29 @@ img.imgcrousel {
   object-position: top;
   border-radius: 8px;
 
- @media (max-width: 767px) {
-    width:350px;
+
+}
+
+@media (max-width: 767px) {
+  .main-slider img {
+    width: 350px;
     height: 500px;
     margin: auto;
-    object-fit:cover;
+    object-fit: cover;
     margin: auto;
-
   }
+}
 
-  @media (min-width: 768px) and (max-width: 1024px) {
- 
+@media (min-width: 768px) and (max-width: 1024px) {
+  .main-slider img {
     width: 400px;
     height: 500px;
     margin: auto;
     object-fit: cover;
-  
+
+
   }
+
 }
 
 .slick-prev {
@@ -135,4 +168,22 @@ img.imgcrousel {
 
 .slick-next::before {
   color: #171717 !important;
+}
+
+
+.thumbnail-list::-webkit-scrollbar {
+  width: 2px;
+}
+.thumbnail-list::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 1px;
+}
+
+@media (max-width:590px) {
+.thumbnail-list::-webkit-scrollbar-thumb{
+
+  background: none;
+}
+
+
 }
