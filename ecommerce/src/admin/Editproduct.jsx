@@ -7,7 +7,7 @@ import { backendurl } from '../baseurl/baseurl';
 
 function Editproduct() {
     const { id } = useParams();
-    const { data: category } = useGetProductCategeroyQuery();
+    const { data: category } = useGetProductCategeroyQuery('');
     const [updateData] = useUpdateSingleProductMutation();
     const [galeryImgdelete] = useDelegalleryimageMutation();
     const { data, isLoading, refetch } = useGetSingleProductQuery(id);

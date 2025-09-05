@@ -164,30 +164,27 @@ const addcategory = async (req, res) => {
 
 
 const getcategory = async (req, res) => {
+  const { searchTerm } = req.query;
 
-  const { searchTerm } = req.query
   try {
-    const query = { productcat: { $regex: new RegExp(searchTerm, 'i') } }
+    let query = {};
 
-    const categories = await Productcat.find(query)
-
-    if (categories) {
-
-      return res.json(categories)
-    } else {
-
-      console.log('not wordking cat api')
+    // If searchTerm exists and is not empty, filter
+    if (searchTerm) {
+      query = { productcat: { $regex: new RegExp(searchTerm, "i") } };
     }
 
+    const categories = await Productcat.find(query);
+
+    res.json(categories);
   } catch (error) {
-
-    console.log(error)
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
+};
 
 
 
-
-}
 
 const getsinglecategory = async (req, res) => {
 
