@@ -4,15 +4,16 @@ import {
   useGetProductCategeroyQuery,
   useGetCurrencyQuery,
 } from '../app/apiproducts';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { addProducts } from '../reducers/cartslice';
 import { useDispatch } from 'react-redux';
 import Sidebar from '../components/sidebar';
 import { backendurl } from '../baseurl/baseurl';
+import loaderGif from '../assets/laoder.gif';
 
 const ShopPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const [productFilter, setProductFilter] = useState('');
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -20,7 +21,8 @@ const ShopPage = () => {
   const [productcat, setCategory] = useState('');
   const [saleprice, setPrice] = useState('');
   const [isOpen, setIsOpen] = useState(false);
-  
+
+  const [initialLoading, setInitialLoading] = useState(true);
 
   const { data: procat } = useGetProductCategeroyQuery('');
   const { data: currency = [{ currency: '' }] } = useGetCurrencyQuery();
@@ -28,7 +30,6 @@ const ShopPage = () => {
   const {
     data: fetchedProducts = [],
     isFetching,
-    refetch,
   } = useGetProductDataQuery({
     page,
     pageSize: 4,
@@ -37,7 +38,23 @@ const ShopPage = () => {
     productFilter,
   });
 
-  // Append new products or replace list on first page
+  // ⏱ Minimum loader delay (1.5s)
+  useEffect(() => {
+    if (!isFetching) {
+      const timer = setTimeout(() => {
+        setInitialLoading(false);
+      }, 1500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isFetching]);
+
+  // Disable scroll while loading
+  useEffect(() => {
+    document.body.style.overflow = initialLoading ? 'hidden' : 'auto';
+  }, [initialLoading]);
+
+  // Append or replace products
   useEffect(() => {
     if (page === 1) {
       setProducts(fetchedProducts);
@@ -46,9 +63,9 @@ const ShopPage = () => {
     }
 
     setHasMore(fetchedProducts.length > 0);
-  }, [fetchedProducts]);
+  }, [fetchedProducts,page]);
 
-  // Infinite scroll trigger
+  // Infinite scroll
   useEffect(() => {
     const handleScroll = () => {
       if (
@@ -64,29 +81,38 @@ const ShopPage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isFetching, hasMore]);
 
-  // Dispatch products to Redux
+  // Sync with Redux
   useEffect(() => {
     dispatch(addProducts(products));
-  }, [products]);
+  }, [products,dispatch]);
 
-  // Reset page on filter change
   const handleFiltersChange = () => {
     setPage(1);
   };
 
+  // 🔹 FULL SCREEN LOADER
+  if (initialLoading) {
+    return (
+      <div className="shop-loader">
+        <img src={loaderGif} alt="Loading..." />
+      </div>
+    );
+  }
+
   return (
-    <div className='shopcontainer'>
-     < Sidebar 
-       setCategory={setCategory} 
-       setPrice={setPrice} 
-       setProductFilter={setProductFilter}
-       productcat={productcat}
-       procat={procat}
-       handleFiltersChange={handleFiltersChange}
-       setIsOpen={setIsOpen}
-       isOpen={isOpen}
-       />
-      <div className='product-container'>
+    <div className="shopcontainer">
+      <Sidebar
+        setCategory={setCategory}
+        setPrice={setPrice}
+        setProductFilter={setProductFilter}
+        productcat={productcat}
+        procat={procat}
+        handleFiltersChange={handleFiltersChange}
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+      />
+
+      <div className="product-container">
         {products.map((product, index) => (
           <div
             key={product._id}
@@ -95,38 +121,42 @@ const ShopPage = () => {
           >
             <Link to={`/product/${product._id}`}>
               {product.discountedprice && (
-                <div className='badge'>
-                  <span className='badge-text'>
+                <div className="badge">
+                  <span className="badge-text">
                     {(
-                      ((product.saleprice - product.discountedprice) / product.saleprice) *
+                      ((product.saleprice - product.discountedprice) /
+                        product.saleprice) *
                       100
                     ).toFixed(0)}
                     % off
                   </span>
                 </div>
               )}
-              <div className='image-wrapper'>
+
+              <div className="image-wrapper">
                 <img
                   src={`${backendurl}/uploads/${product.galleryimages[0]}`}
-                  className='product-image'
+                  className="product-image"
                   alt={product.productname}
                 />
                 <img
                   src={`${backendurl}/uploads/${product.productimage}`}
-                  className='gallery-image'
+                  className="gallery-image"
                   alt={product.productname}
                 />
               </div>
             </Link>
-            <p className='product-name'>{product.productname}</p>
+
+            <p className="product-name">{product.productname}</p>
+
             {product.discountedprice ? (
-              <div className='discountprice'>
+              <div className="discountprice">
                 <s>
                   <p>
                     {currency[0]?.currency} {product.saleprice}
                   </p>
                 </s>
-                <p className='discounted'>
+                <p className="discounted">
                   {currency[0]?.currency} {product.discountedprice}
                 </p>
               </div>
@@ -137,8 +167,8 @@ const ShopPage = () => {
             )}
           </div>
         ))}
-        {isFetching && <p style={{ textAlign: 'center' }}>Loading...</p>}
-        {!hasMore && <p style={{ textAlign: 'center' }}>No more products</p>}
+
+       
       </div>
     </div>
   );
