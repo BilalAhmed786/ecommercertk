@@ -10,9 +10,10 @@ import ProductSlider from '../components/Productslickslider';
 import {
   useGetSingleProductQuery,
   useProductsReviewsMutation,
-  useGetProductsreviewsQuery
+  useGetProductsreviewsQuery,
+  useGetCurrencyQuery
 } from '../app/apiproducts';
-import loaderGif from '../assets/laoder.gif'; // loader image
+import loaderGif from '../assets/loader.gif'; // loader image
 
 function Product() {
   const { id } = useParams();
@@ -24,6 +25,7 @@ function Product() {
   const { data, error, isLoading } = useGetSingleProductQuery(id);
   const { data: proreviews } = useGetProductsreviewsQuery(id);
   const [productreviews] = useProductsReviewsMutation();
+   const { data: currency = [{ currency: "" }] } = useGetCurrencyQuery();
 
   // 🔹 Loader with small delay
   const [showLoader, setShowLoader] = useState(true);
@@ -87,7 +89,7 @@ function Product() {
 
         <div className='productdetails'>
           <h2>{data.productname}</h2>
-          <p>${data.saleprice}</p>
+          <p>{currency[0]?.currency} {data.saleprice}</p>
           <p className='prodesc'>{data.productshortdesc}</p>
           <button className='addtocart' onClick={() => handleAddToCart(data._id)}>Add to Cart</button>
         </div>
