@@ -69,6 +69,11 @@ function Checkout(props) {
         fetchUserInfo();
     }, [data, billingaddress]);
 
+    useEffect(() => {
+      window.scrollTo(0, 0); // scroll to top on mount
+    }, []);
+    
+
     const [paymentMode] = useStripePaymentMutation();
     const stripe = useStripe();
     const elements = useElements();

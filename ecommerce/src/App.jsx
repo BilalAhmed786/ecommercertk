@@ -3,6 +3,7 @@ import './admin/css/common.css'
 import './css/header.css'
 import './css/shoppage.css'
 import './css/cart.css'
+import './css/about.css'
 import './css/loader.css'
 import './css/slick.css'
 import './css/productpage.css'
@@ -59,6 +60,7 @@ import Orderview from './admin/Orderview';
 import Changepassword from './admin/Changepassword';
 import Clientorders from './client/Clientorders';
 import Clientordersview from './client/Clientordersview';
+import AboutUs from './pages/About';
 
 
 
@@ -78,6 +80,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkoutstripe />} />
             <Route path="/product/:id" element={<Product />} />
+            <Route path="/aboutus" element={<AboutUs />} />
             {/* auth routes */}
             <Route path="/register" element={<AuthProcted Component={Registeration} />} />
             <Route path="/login" element={<AuthProcted Component={Login} />} />

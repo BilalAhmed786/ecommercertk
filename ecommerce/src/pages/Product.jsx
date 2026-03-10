@@ -13,7 +13,7 @@ import {
   useGetProductsreviewsQuery,
   useGetCurrencyQuery
 } from '../app/apiproducts';
-import loaderGif from '../assets/loader.gif'; // loader image
+import loaderGif from '../assets/laoder.gif'; // loader image
 
 function Product() {
   const { id } = useParams();

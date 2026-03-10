@@ -49,6 +49,11 @@ const ShopPage = () => {
     }
   }, [isFetching]);
 
+ 
+useEffect(() => {
+  window.scrollTo(0, 0); // scroll to top on mount
+}, []);
+
   // append products properly to avoid duplicates
   useEffect(() => {
     if (isSuccess) {

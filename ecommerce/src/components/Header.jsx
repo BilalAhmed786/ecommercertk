@@ -53,7 +53,7 @@ function Header() {
 
 
 
-  }, [userdata])
+  }, [refetchuser,userdata])
 
 
   return (
@@ -86,6 +86,7 @@ function Header() {
           <Link className='menuheader' to="/" onClick={() => setRegister(false)}>Shop</Link>
           <Link className='menuheader' to="/cart" onClick={() => setRegister(false)}>Cart</Link>
           <Link className='menuheader' to="/checkout" onClick={() => setRegister(false)}>Checkout</Link>
+          <Link className='menuheader' to="/aboutus" onClick={() => setRegister(false)}>About us</Link>
           {userdata?.userrole === 'admin' ? <Link className='menuheader' to="/dashboard">Dashboard</Link> : ''}
           {userdata?.userrole === 'subscriber' && <Link className='menuheader' to="/client">Dashboard</Link>}
         </div>

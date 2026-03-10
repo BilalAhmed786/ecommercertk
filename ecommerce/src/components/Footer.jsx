@@ -98,7 +98,7 @@ const Footer = () => {
             <li><Link to="">Shop</Link></li>
             <li><Link to="/cart">Cart</Link></li>
             <li><Link to="/checkout">Checkout</Link></li>
-            <li><Link to="">About Us</Link></li>
+            <li><Link to="/aboutus">About Us</Link></li>
           </ul>
         </div>
 
@@ -110,11 +110,11 @@ const Footer = () => {
           </div>
           <div>
             <h6><FontAwesomeIcon icon={faMobileAlt} /> Phone</h6>
-            <p>+923315195278</p>
+            <p>+923345157899</p>
           </div>
           <div>
             <h6><FontAwesomeIcon icon={faEnvelope} /> Email</h6>
-            <p>fasst.sallar@gmail.com</p>
+            <p>we.thrift@gmail.com</p>
           </div>
           <div>
             <h6>Follow Us</h6>

@@ -28,6 +28,11 @@ function Cart() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0); // scroll to top on mount
+  }, []);
+  
+
   const handleRemoveFromCart = (productId) => {
     dispatch(removeFromCart(productId));
     toast.success("Item removed successfully");
