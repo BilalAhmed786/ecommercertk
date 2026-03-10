@@ -4,27 +4,34 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { decreaseQuantity, removeFromCart, increaseQuantity } from '../reducers/cartslice';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useGetCurrencyQuery,useGetProductssliderQuery} from '../app/apiproducts';
+import { useGetCurrencyQuery, useGetProductssliderQuery } from '../app/apiproducts';
 import Slider from 'react-slick';
 import { settings } from '../components/slickcrousel';
 import { backendurl } from '../baseurl/baseurl';
+import { useState, useEffect } from 'react';
+import loaderGif from '../assets/laoder.gif'; // put your loader GIF in this path
 
 function Cart() {
+  const { data, isLoading } = useGetCurrencyQuery();
+  const { data: sliderdata } = useGetProductssliderQuery();
 
- const{data,isLoading} =useGetCurrencyQuery()
- const {data:sliderdata} =useGetProductssliderQuery()
-
- const cartItems = useSelector((state) => state.cart.cart);
-
+  const cartItems = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
 
+  const [loading, setLoading] = useState(true);
+
+  // Simulate delay for loader
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000); // 1 second delay
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleRemoveFromCart = (productId) => {
-
     dispatch(removeFromCart(productId));
-  
-    toast.success("item removed successfully")
+    toast.success("Item removed successfully");
   };
-
 
   const handleDecreaseQuantity = (productId) => {
     dispatch(decreaseQuantity(productId));
@@ -35,104 +42,94 @@ function Cart() {
   };
 
   const getTotalPrice = () => {
-    
-      return cartItems.reduce((total, item) => total + item.saleprice * item.quantity, 0);
-  
+    return cartItems.reduce((total, item) => total + item.saleprice * item.quantity, 0);
   };
-    
-    
-    const carttotal= getTotalPrice();
 
-    localStorage.setItem('carttotal',carttotal)
+  const carttotal = getTotalPrice();
+  localStorage.setItem('carttotal', carttotal);
 
+  if (isLoading || loading) {
+    return (
+      <div className='shop-loader'>
+        <img src={loaderGif} alt="Loading..."/>
+      </div>
+    );
+  }
 
-
-   
-    if (isLoading) return <div>Loading...</div>;
   return (
     <div className='cartcontainer'>
+      {cartItems.length === 0 ? (
+        <h6 style={{ display: 'block', textAlign: "center" }}>Cart is empty</h6>
+      ) : (
+        <>
+          <table className="carttable">
+            <thead>
+              <tr>
+                <th>Sr</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th className='qtycart'>Qty</th>
+                <th>Remove</th>
+              </tr>
+            </thead>
 
-      
-     
-      {cartItems.length === 0 ?
-
-
-        <h6 style={{ display:'block',textAlign: "center" }}>cart is empty</h6>
-
-        :
-
-        (
-          <>
-
-            <table className="carttable">
-              <thead>
-                <tr>
-                  <th>Sr</th>
-                  <th>Name</th>
-                  <th>Price</th>
-                  <th className='qtycart'>Qty</th>
-                  <th>Remove</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {cartItems.map((item, index) => (
-
-                  <tr key={item._id}>
-                    <td>{index + 1}</td>
-                    <td><div><img style={{ width: 50 }} src={`${backendurl}/uploads/${item.productimage}`} alt='' /></div><div>{item.productname}</div></td>
-                    <td>{item.saleprice}</td>
-                    <td>
-                      <div className='cartQty'>
-                      <button className='cartincbtnleft'  onClick={() => handleDecreaseQuantity(item._id)}>
-                       -
+            <tbody>
+              {cartItems.map((item, index) => (
+                <tr key={item._id}>
+                  <td>{index + 1}</td>
+                  <td>
+                    <div>
+                      <img style={{ width: 50 }} src={`${backendurl}/uploads/${item.productimage}`} alt='' />
+                    </div>
+                    <div>{item.productname}</div>
+                  </td>
+                  <td>{item.saleprice}</td>
+                  <td>
+                    <div className='cartQty'>
+                      <button className='cartincbtnleft' onClick={() => handleDecreaseQuantity(item._id)}>
+                        -
                       </button>
-                    
-                     {item.quantity} 
-                      
-                      <button className='cartincbtnright' onClick={() => handleIncreaseQuantity(item._id)} disabled={item.quantity === item.inventory}
-                       >
+                      {item.quantity}
+                      <button className='cartincbtnright' onClick={() => handleIncreaseQuantity(item._id)} disabled={item.quantity === item.inventory}>
                         +
                       </button>
                     </div>
-                     </td>
-                    <td><button style={{color:'red',background:'none',border:"none",cursor:'pointer'}} onClick={() => handleRemoveFromCart(item._id)}><FontAwesomeIcon icon={faTrashAlt} /></button></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                  </td>
+                  <td>
+                    <button style={{ color: 'red', background: 'none', border: "none", cursor: 'pointer' }} onClick={() => handleRemoveFromCart(item._id)}>
+                      <FontAwesomeIcon icon={faTrashAlt} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
 
-         <div className='proceedcheckout'>
-            <h5 className='totalprice'>Total Price: {getTotalPrice()} {data?data[0].currency:''}</h5>
-                  <Link to='/checkout'>
-                  <button  className='btn btn-danger'>Proeced to Checkout</button>
-                  </Link>
-            </div>
-       <div className='slidecrousel'>
-      <h2 style={{marginBottom:22,fontFamily:'aviano'}}>Latest Products</h2>
-      <Slider {...settings}>
-        {sliderdata?sliderdata.map((product) => (
-         
-          <div className='latestprocrous'>
-            <Link key={product.id} to={`/product/${product._id}`}>
-            <img className='imgcrousel' src={`${backendurl}/uploads/${product.productimage}`} alt={product.name} />
-            </Link> 
-            <p style={{textAlign:'center',textDecoration:'none'}}>{product.productname}</p>
-            <p>{product.saleprice} {data? data[0].currency:''}</p>
+          <div className='proceedcheckout'>
+            <h5 className='totalprice'>Total Price: {getTotalPrice()} {data ? data[0].currency : ''}</h5>
+            <Link to='/checkout'>
+              <button className='btn btn-danger'>Proceed to Checkout</button>
+            </Link>
           </div>
-       
-        )):null}
-      </Slider>
-    </div>
 
-           
-          </>
-         
-        )
-      }
-
+          <div className='slidecrousel'>
+            <h2 style={{ marginBottom: 22, fontFamily: 'aviano' }}>Latest Products</h2>
+            <Slider {...settings}>
+              {sliderdata ? sliderdata.map((product) => (
+                <div className='latestprocrous' key={product._id}>
+                  <Link to={`/product/${product._id}`}>
+                    <img className='imgcrousel' src={`${backendurl}/uploads/${product.productimage}`} alt={product.productname} />
+                  </Link>
+                  <p style={{ textAlign: 'center', textDecoration: 'none' }}>{product.productname}</p>
+                  <p>{product.saleprice} {data ? data[0].currency : ''}</p>
+                </div>
+              )) : null}
+            </Slider>
+          </div>
+        </>
+      )}
     </div>
-  )
+  );
 }
 
-export default Cart
+export default Cart;

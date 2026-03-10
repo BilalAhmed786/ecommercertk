@@ -7,6 +7,7 @@ import { useGetBillingaddressQuery } from '../app/apiorders';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { frontendurl } from '../baseurl/baseurl';
+import loaderGif from '../assets/laoder.gif'; // Add your loader GIF here
 
 function Checkout(props) {
     const navigate = useNavigate();
@@ -17,6 +18,14 @@ function Checkout(props) {
     const [data] = useUserDetailsMutation();
     const [userinfo, setUserinfo] = useState('');
     const { data: billingaddress, isLoading } = useGetBillingaddressQuery(userinfo ? userinfo?.useremail : '');
+
+    const [loading, setLoading] = useState(true); // loader state
+
+    // Show loader for 1s
+    useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 1000);
+        return () => clearTimeout(timer);
+    }, []);
 
     let productname = [], productsprice = [], inventory = [], productid = [], productquantity = [];
 
@@ -30,10 +39,7 @@ function Checkout(props) {
         navigate('/');
     }
 
-    const getTotalPrice = () => {
-        return cartdetails.reduce((total, item) => total + item.saleprice * item.quantity, 0);
-    };
-
+    const getTotalPrice = () => cartdetails.reduce((total, item) => total + item.saleprice * item.quantity, 0);
     let carttotal = getTotalPrice();
     let totalamount = parseInt(carttotal) + parseInt(shipmentcharges);
 
@@ -42,11 +48,8 @@ function Checkout(props) {
             try {
                 const result = await data();
                 if (result && result.data) {
-
-                  console.log(result.data)
                     setUserinfo(result.data);
 
-                    
                     if (billingaddress && billingaddress.length > 0) {
                         const defaultBilling = billingaddress[0];
                         setPaymentMethod((prev) => ({
@@ -64,8 +67,7 @@ function Checkout(props) {
             }
         };
         fetchUserInfo();
-    }, [billingaddress]);
-
+    }, [data, billingaddress]);
 
     const [paymentMode] = useStripePaymentMutation();
     const stripe = useStripe();
@@ -89,7 +91,7 @@ function Checkout(props) {
                     productsprice, inventory, productquantity, carttotal, shipmentcharges, totalamount,
                 });
                 if (!result.data.msg) toast.error(result.data);
-                else window.location.href =frontendurl;
+                else window.location.href = frontendurl;
             } else toast.error(error.message);
         } else {
             const result = await paymentMode({
@@ -105,7 +107,13 @@ function Checkout(props) {
         }
     };
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading || loading) {
+        return (
+            <div className='shop-loader'>
+                <img src={loaderGif} alt="Loading..." />
+            </div>
+        );
+    }
 
     return (
         <div className='checkout-container'>

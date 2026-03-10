@@ -1,5 +1,5 @@
 // Product.jsx
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addToCart } from '../reducers/cartslice';
@@ -12,6 +12,7 @@ import {
   useProductsReviewsMutation,
   useGetProductsreviewsQuery
 } from '../app/apiproducts';
+import loaderGif from '../assets/laoder.gif'; // loader image
 
 function Product() {
   const { id } = useParams();
@@ -24,8 +25,23 @@ function Product() {
   const { data: proreviews } = useGetProductsreviewsQuery(id);
   const [productreviews] = useProductsReviewsMutation();
 
+  // 🔹 Loader with small delay
+  const [showLoader, setShowLoader] = useState(true);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const timer = setTimeout(() => setShowLoader(false), 500); // 0.5s delay
+      return () => clearTimeout(timer);
+    }
+  }, [isLoading]);
+
+
+  useEffect(() => {
+  window.scrollTo(0, 0); // instant scroll to top
+}, [id]);
+
   const handleAddToCart = (productId) => {
-    toast.success("product added");
+    toast.success("Product added");
     dispatch(addToCart(productId));
   };
 
@@ -53,12 +69,19 @@ function Product() {
     }
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  // 🔹 Show loader while fetching or during the small delay
+  if (isLoading || showLoader) {
+    return (
+      <div className="shop-loader">
+        <img src={loaderGif} alt="Loading..." className="w-20 h-20" />
+      </div>
+    );
+  }
+
+  if (error) return <div className="text-center text-red-500">Error: {error.message}</div>;
 
   return (
     <div className='productcontainer'>
-
       <div className='productwraper'>
         <ProductSlider images={data.galleryimages} />
 
@@ -70,7 +93,7 @@ function Product() {
         </div>
       </div>
 
-      {/* //Client reviews */}
+      {/* Client reviews */}
       {proreviews?.length > 0 && (
         <div className="client-reviews">
           <h4 className="reviews-heading">Client Reviews</h4>
@@ -88,8 +111,8 @@ function Product() {
           ))}
         </div>
       )}
-    {/* // review form */}
-    
+
+      {/* Review form */}
       <div style={{ marginTop: 35 }} className='reviewform'>
         <form className='formreview' ref={formRef} onSubmit={handleSubmit}>
           <h4>Leave a Review</h4>
@@ -121,8 +144,6 @@ function Product() {
           <button className='btn btn-danger' type="submit">Submit</button>
         </form>
       </div>
-
-
     </div>
   );
 }

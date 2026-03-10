@@ -1,96 +1,105 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from "react";
 import {
   useGetProductDataQuery,
   useGetProductCategeroyQuery,
   useGetCurrencyQuery,
-} from '../app/apiproducts';
-import { Link } from 'react-router-dom';
-import { addProducts } from '../reducers/cartslice';
-import { useDispatch } from 'react-redux';
-import Sidebar from '../components/sidebar';
-import { backendurl } from '../baseurl/baseurl';
-import loaderGif from '../assets/laoder.gif';
+} from "../app/apiproducts";
+import { Link } from "react-router-dom";
+import { addProducts } from "../reducers/cartslice";
+import { useDispatch } from "react-redux";
+import Sidebar from "../components/sidebar";
+import { backendurl } from "../baseurl/baseurl";
+import loaderGif from "../assets/laoder.gif";
 
 const ShopPage = () => {
   const dispatch = useDispatch();
 
-  const [productFilter, setProductFilter] = useState('');
+  const [productFilter, setProductFilter] = useState("");
   const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
   const [products, setProducts] = useState([]);
-  const [productcat, setCategory] = useState('');
-  const [saleprice, setPrice] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
+  const [productcat, setCategory] = useState("");
+  const [saleprice, setPrice] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true);
 
-  const { data: procat } = useGetProductCategeroyQuery('');
-  const { data: currency = [{ currency: '' }] } = useGetCurrencyQuery();
+  const { data: procat } = useGetProductCategeroyQuery("");
+  const { data: currency = [{ currency: "" }] } = useGetCurrencyQuery();
 
   const {
     data: fetchedProducts = [],
     isFetching,
+    isSuccess,
   } = useGetProductDataQuery({
     page,
-    pageSize: 4,
+    pageSize: 8,
     saleprice,
     productcat,
     productFilter,
   });
 
-  // ⏱ Minimum loader delay (1.5s)
+  const scrollRef = useRef(false);
+
+  // initial loading state
   useEffect(() => {
     if (!isFetching) {
-      const timer = setTimeout(() => {
-        setInitialLoading(false);
-      }, 1500);
-
+      const timer = setTimeout(() => setInitialLoading(false), 500);
       return () => clearTimeout(timer);
     }
   }, [isFetching]);
 
-  // Disable scroll while loading
+  // append products properly to avoid duplicates
   useEffect(() => {
-    document.body.style.overflow = initialLoading ? 'hidden' : 'auto';
-  }, [initialLoading]);
+    if (isSuccess) {
+      if (page === 1) {
+        setProducts(fetchedProducts); // first page, replace
+      } else {
+        // prevent duplicates
+        setProducts((prev) => [
+          ...prev,
+          ...fetchedProducts.filter(
+            (p) => !prev.some((prevP) => prevP._id === p._id)
+          ),
+        ]);
+      }
 
-  // Append or replace products
-  useEffect(() => {
-    if (page === 1) {
-      setProducts(fetchedProducts);
-    } else {
-      setProducts((prev) => [...prev, ...fetchedProducts]);
+      setHasMore(fetchedProducts.length > 0);
     }
+  }, [fetchedProducts, page, isSuccess]);
 
-    setHasMore(fetchedProducts.length > 0);
-  }, [fetchedProducts,page]);
+  // infinite scroll
+ useEffect(() => {
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+    const viewportHeight = window.innerHeight;
+    const fullHeight = document.documentElement.scrollHeight; 
 
-  // Infinite scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >= document.body.offsetHeight - 300 &&
-        !isFetching &&
-        hasMore
-      ) {
+    // trigger when user is within 15% of bottom
+    if (scrollTop + viewportHeight >= fullHeight * 0.65 && !isFetching && hasMore) {
+      if (!scrollRef.current) {
+        scrollRef.current = true;
         setPage((prev) => prev + 1);
       }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isFetching, hasMore]);
-
-  // Sync with Redux
-  useEffect(() => {
-    dispatch(addProducts(products));
-  }, [products,dispatch]);
-
-  const handleFiltersChange = () => {
-    setPage(1);
+    }
   };
 
-  // 🔹 FULL SCREEN LOADER
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, [isFetching, hasMore]);
+
+   // reset scrollRef after fetching next page
+  useEffect(() => {
+    if (!isFetching) scrollRef.current = false;
+  }, [isFetching]);
+
+  // sync with redux
+  useEffect(() => {
+    dispatch(addProducts(products));
+  }, [products, dispatch]);
+
+  const handleFiltersChange = () => setPage(1);
+
   if (initialLoading) {
     return (
       <div className="shop-loader">
@@ -116,7 +125,7 @@ const ShopPage = () => {
         {products.map((product, index) => (
           <div
             key={product._id}
-            className={`product-display ${page > 1 ? 'new-product' : ''}`}
+            className={`product-display ${page > 1 ? "new-product" : ""}`}
             style={{ animationDelay: `${index * 50}ms` }}
           >
             <Link to={`/product/${product._id}`}>
@@ -167,8 +176,6 @@ const ShopPage = () => {
             )}
           </div>
         ))}
-
-       
       </div>
     </div>
   );

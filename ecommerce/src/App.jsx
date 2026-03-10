@@ -3,6 +3,7 @@ import './admin/css/common.css'
 import './css/header.css'
 import './css/shoppage.css'
 import './css/cart.css'
+import './css/loader.css'
 import './css/slick.css'
 import './css/productpage.css'
 import './css/checkout.css'
@@ -20,6 +21,7 @@ import  './admin/css/productfilter.css'
 import './client/css/welcome.css'
 import './client/css/sidebarclient.css'
 import './client/css/orderreview.css'
+
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Headers from './components/Header';
