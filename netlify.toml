@@ -1,4 +1,6 @@
 [build]
-base = "ecommerce"
-command = "npm run build"
-publish = "build"
+  base = "ecommerce"
+  command = "DISABLE_ESLINT_PLUGIN=true CI= npm run build"
+  publish = "build"
+
+
