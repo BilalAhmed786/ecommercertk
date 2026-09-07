@@ -2,3 +2,9 @@
   base = "ecommerce"
   command = "DISABLE_ESLINT_PLUGIN=true CI= npm run build"
   publish = "build"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://thrifter-backend.onrender.com/api/:splat"
+  status = 200
+  force = true
