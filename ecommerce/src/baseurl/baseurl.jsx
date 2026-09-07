@@ -1,3 +1,3 @@
-export const backendurl = 'http://localhost:3001'
-export const frontendurl ='http://localhost:3000'
+export const backendurl = 'https://thrifter-backend.onrender.com'
+export const frontendurl ='https://thrifterspoint.netlify.app'
 

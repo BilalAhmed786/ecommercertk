@@ -7,7 +7,11 @@ const cookieParser = require('cookie-parser');
 const routes = require('./routes/router')
 const app = express()
 app.use(cors({
-  origin: 'http://localhost:3000', 
+  origin: [
+    'https://thrifterspoint.netlify.app',
+    'https://thrifter-frontend.onrender.com',
+    'http://localhost:3000'
+  ],
   credentials: true,
 }))
 app.use(express.json())
