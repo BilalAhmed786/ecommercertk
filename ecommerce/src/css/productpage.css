@@ -1231,9 +1231,7 @@
     padding: 10px;
   }
 
-  .main-image-container {
-    height: 280px;
-  }
+ 
 
   .thumb-img {
     width: 58px;
@@ -1305,9 +1303,7 @@
 
 @media (max-width: 350px) {
 
-  .main-image-container {
-    height: 240px;
-  }
+ 
 
   .product-title {
     font-size: 20px;
