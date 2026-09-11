@@ -4,10 +4,10 @@ import {
   useGetProductCategeroyQuery,
   useGetCurrencyQuery,
 } from "../app/apiproducts";
+import { useGetRangeQuery } from "../app/productfilter";
 import { Link } from "react-router-dom";
 import { addProducts } from "../reducers/cartslice";
 import { useDispatch } from "react-redux";
-import Sidebar from "../components/sidebar";
 import { backendurl } from "../baseurl/baseurl";
 import loaderGif from "../assets/laoder.gif";
 
@@ -15,18 +15,27 @@ const ShopPage = () => {
   const dispatch = useDispatch();
 
   const [productFilter, setProductFilter] = useState("");
+  const [productcat, setCategory] = useState("");
+  const [saleprice, setPrice] = useState("");
+
   const [page, setPage] = useState(1);
   const [products, setProducts] = useState([]);
   const [hasMore, setHasMore] = useState(true);
-
-  const [productcat, setCategory] = useState("");
-  const [saleprice, setPrice] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
   const [initialLoading, setInitialLoading] = useState(true);
 
-  const { data: procat } = useGetProductCategeroyQuery("");
-  const { data: currency = [{ currency: "" }] } = useGetCurrencyQuery();
+  const scrollRef = useRef(false);
 
+  // Categories
+  const { data: procat } = useGetProductCategeroyQuery("");
+
+  // Price ranges
+  const { data: priceRanges } = useGetRangeQuery();
+
+  // Currency
+  const { data: currency = [{ currency: "" }] } =
+    useGetCurrencyQuery();
+
+  // Products
   const {
     data: fetchedProducts = [],
     isFetching,
@@ -39,149 +48,466 @@ const ShopPage = () => {
     productFilter,
   });
 
-  const scrollRef = useRef(false);
+  /* ===============================
+     INITIAL LOADING
+  =============================== */
 
-  // initial loading state
   useEffect(() => {
     if (!isFetching) {
-      const timer = setTimeout(() => setInitialLoading(false), 500);
+      const timer = setTimeout(() => {
+        setInitialLoading(false);
+      }, 500);
+
       return () => clearTimeout(timer);
     }
   }, [isFetching]);
 
- 
-useEffect(() => {
-  window.scrollTo(0, 0); // scroll to top on mount
-}, []);
 
-  // append products properly to avoid duplicates
+  /* ===============================
+     SCROLL TOP
+  =============================== */
+
   useEffect(() => {
-    if (isSuccess) {
-      if (page === 1) {
-        setProducts(fetchedProducts); // first page, replace
-      } else {
-        // prevent duplicates
-        setProducts((prev) => [
-          ...prev,
-          ...fetchedProducts.filter(
-            (p) => !prev.some((prevP) => prevP._id === p._id)
-          ),
-        ]);
-      }
+    window.scrollTo(0, 0);
+  }, []);
 
-      setHasMore(fetchedProducts.length > 0);
-    }
-  }, [fetchedProducts, page, isSuccess]);
 
-  // infinite scroll
- useEffect(() => {
-  const handleScroll = () => {
-    const scrollTop = window.scrollY;
-    const viewportHeight = window.innerHeight;
-    const fullHeight = document.documentElement.scrollHeight; 
+  /* ===============================
+     PRODUCTS
+  =============================== */
 
-    // trigger when user is within 15% of bottom
-    if (scrollTop + viewportHeight >= fullHeight * 0.65 && !isFetching && hasMore) {
-      if (!scrollRef.current) {
-        scrollRef.current = true;
-        setPage((prev) => prev + 1);
-      }
-    }
-  };
-
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, [isFetching, hasMore]);
-
-   // reset scrollRef after fetching next page
   useEffect(() => {
-    if (!isFetching) scrollRef.current = false;
+    if (!isSuccess) return;
+
+    if (page === 1) {
+      setProducts(fetchedProducts);
+    } else {
+      setProducts((prev) => [
+        ...prev,
+        ...fetchedProducts.filter(
+          (product) =>
+            !prev.some(
+              (prevProduct) =>
+                prevProduct._id === product._id
+            )
+        ),
+      ]);
+    }
+
+    // pageSize is 8
+    setHasMore(fetchedProducts.length === 8);
+
+  }, [
+    fetchedProducts,
+    page,
+    isSuccess,
+  ]);
+
+
+  /* ===============================
+     INFINITE SCROLL
+  =============================== */
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      const fullHeight =
+        document.documentElement.scrollHeight;
+
+      if (
+        scrollTop + viewportHeight >= fullHeight * 0.65 &&
+        !isFetching &&
+        hasMore
+      ) {
+        if (!scrollRef.current) {
+          scrollRef.current = true;
+
+          setPage((prev) => prev + 1);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener(
+        "scroll",
+        handleScroll
+      );
+    };
+  }, [isFetching, hasMore]);
+
+
+  /* ===============================
+     RESET SCROLL LOCK
+  =============================== */
+
+  useEffect(() => {
+    if (!isFetching) {
+      scrollRef.current = false;
+    }
   }, [isFetching]);
 
-  // sync with redux
+
+  /* ===============================
+     CART
+  =============================== */
+
   useEffect(() => {
     dispatch(addProducts(products));
   }, [products, dispatch]);
 
-  const handleFiltersChange = () => setPage(1);
+
+  /* ===============================
+     FILTER HANDLERS
+  =============================== */
+
+  const handleSearchChange = (e) => {
+    setProductFilter(e.target.value);
+    setPage(1);
+    setHasMore(true);
+  };
+
+  const handleCategoryChange = (e) => {
+    setCategory(e.target.value);
+    setPage(1);
+    setHasMore(true);
+  };
+
+  const handlePriceChange = (e) => {
+    setPrice(e.target.value);
+    setPage(1);
+    setHasMore(true);
+  };
+
+  const clearFilters = () => {
+    setProductFilter("");
+    setCategory("");
+    setPrice("");
+
+    setPage(1);
+    setHasMore(true);
+  };
+
+
+  /* ===============================
+     LOADER
+  =============================== */
 
   if (initialLoading) {
     return (
       <div className="shop-loader">
-        <img src={loaderGif} alt="Loading..." />
+        <img
+          src={loaderGif}
+          alt="Loading..."
+        />
       </div>
     );
   }
 
+
   return (
-    <div className="shopcontainer">
-      <Sidebar
-        setCategory={setCategory}
-        setPrice={setPrice}
-        setProductFilter={setProductFilter}
-        productcat={productcat}
-        procat={procat}
-        handleFiltersChange={handleFiltersChange}
-        setIsOpen={setIsOpen}
-        isOpen={isOpen}
-      />
+    <div className="shop-page">
 
-      <div className="product-container">
-        {products.map((product, index) => (
-          <div
-            key={product._id}
-            className={`product-display ${page > 1 ? "new-product" : ""}`}
-            style={{ animationDelay: `${index * 50}ms` }}
-          >
-            <Link to={`/product/${product._id}`}>
-              {product.discountedprice && (
-                <div className="badge">
-                  <span className="badge-text">
-                    {(
-                      ((product.saleprice - product.discountedprice) /
-                        product.saleprice) *
-                      100
-                    ).toFixed(0)}
-                    % off
-                  </span>
-                </div>
-              )}
+      {/* ===============================
+          HEADER
+      =============================== */}
 
-              <div className="image-wrapper">
-                <img
-                  src={`${backendurl}/uploads/${product.galleryimages[0]}`}
-                  className="product-image"
-                  alt={product.productname}
-                />
-                <img
-                  src={`${backendurl}/uploads/${product.productimage}`}
-                  className="gallery-image"
-                  alt={product.productname}
-                />
-              </div>
-            </Link>
+      <section className="shop-header">
 
-            <p className="product-name">{product.productname}</p>
+        <div className="shop-header-inner">
 
-            {product.discountedprice ? (
-              <div className="discountprice">
-                <s>
-                  <p>
-                    {currency[0]?.currency} {product.saleprice}
-                  </p>
-                </s>
-                <p className="discounted">
-                  {currency[0]?.currency} {product.discountedprice}
-                </p>
-              </div>
-            ) : (
-              <p>
-                {currency[0]?.currency} {product.saleprice}
-              </p>
-            )}
+          <span className="shop-eyebrow">
+            OUR COLLECTION
+          </span>
+
+          <h1>
+            Shop Our Products
+          </h1>
+
+          <p>
+            Discover our latest collection and
+            find something perfect for you.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      {/* ===============================
+          FILTERS
+      =============================== */}
+
+      <section className="shop-filter-section">
+
+        <div className="shop-filter-bar">
+
+          {/* SEARCH */}
+
+          <div className="shop-search">
+
+            <span className="search-icon">
+              ⌕
+            </span>
+
+            <input
+              type="text"
+              value={productFilter}
+              placeholder="Search products..."
+              onChange={handleSearchChange}
+            />
+
           </div>
-        ))}
-      </div>
+
+
+          {/* CATEGORY */}
+
+          <div className="shop-filter">
+
+            <label>
+              Category
+            </label>
+
+            <select
+              value={productcat}
+              onChange={handleCategoryChange}
+            >
+
+              <option value="">
+                All Categories
+              </option>
+
+              {procat?.map((cat, index) => (
+                <option
+                  key={index}
+                  value={cat.productcat}
+                >
+                  {cat.productcat}
+                </option>
+              ))}
+
+            </select>
+
+          </div>
+
+
+          {/* PRICE */}
+
+          <div className="shop-filter">
+
+            <label>
+              Price
+            </label>
+
+            <select
+              value={saleprice}
+              onChange={handlePriceChange}
+            >
+
+              <option value="">
+                All Prices
+              </option>
+
+              {priceRanges?.map((range, index) => (
+                <option
+                  key={index}
+                  value={range.range}
+                >
+                  {range.range}
+                </option>
+              ))}
+
+            </select>
+
+          </div>
+
+
+          {/* CLEAR */}
+
+          {(productFilter ||
+            productcat ||
+            saleprice) && (
+
+            <button
+              className="clear-filter"
+              onClick={clearFilters}
+            >
+              Clear
+            </button>
+
+          )}
+
+        </div>
+
+      </section>
+
+
+      {/* ===============================
+          PRODUCTS
+      =============================== */}
+
+      <main className="shop-products">
+
+        <div className="shop-products-header">
+
+          <div>
+
+            <span>
+              COLLECTION
+            </span>
+
+            <h2>
+              Explore Products
+            </h2>
+
+          </div>
+
+          <p>
+            {products.length} products
+          </p>
+
+        </div>
+
+
+        <div className="product-container">
+
+          {products.map((product, index) => (
+
+            <div
+              key={product._id}
+              className="product-display"
+              style={{
+                animationDelay:
+                  `${index * 50}ms`,
+              }}
+            >
+
+              <Link
+                to={`/product/${product._id}`}
+                className="product-link"
+              >
+
+                <div className="image-wrapper">
+
+                  {/* DISCOUNT */}
+
+                  {product.discountedprice && (
+                    <span className="badge">
+
+                      {(
+                        (
+                          (product.saleprice -
+                            product.discountedprice) /
+                          product.saleprice
+                        ) * 100
+                      ).toFixed(0)}
+
+                      % OFF
+
+                    </span>
+                  )}
+
+
+                  {/* FIRST IMAGE */}
+
+                  <img
+                    src={`${backendurl}/uploads/${product.galleryimages?.[0]}`}
+                    className="product-image"
+                    alt={product.productname}
+                  />
+
+
+                  {/* SECOND IMAGE */}
+
+                  <img
+                    src={`${backendurl}/uploads/${product.productimage}`}
+                    className="gallery-image"
+                    alt={product.productname}
+                  />
+
+
+                  {/* VIEW */}
+
+                  <span className="view-product">
+                    View Product →
+                  </span>
+
+                </div>
+
+
+                {/* INFO */}
+
+                <div className="product-info">
+
+                  <div className="product-title-row">
+
+                    <p className="product-name">
+                      {product.productname}
+                    </p>
+
+                    <span className="product-arrow">
+                      ↗
+                    </span>
+
+                  </div>
+
+
+                  {/* PRICE */}
+
+                  {product.discountedprice ? (
+
+                    <div className="discountprice">
+
+                      <span className="old-price">
+                        {currency[0]?.currency}{" "}
+                        {product.saleprice}
+                      </span>
+
+                      <span className="discounted">
+                        {currency[0]?.currency}{" "}
+                        {product.discountedprice}
+                      </span>
+
+                    </div>
+
+                  ) : (
+
+                    <p className="normal-price">
+                      {currency[0]?.currency}{" "}
+                      {product.saleprice}
+                    </p>
+
+                  )}
+
+                </div>
+
+              </Link>
+
+            </div>
+
+          ))}
+
+        </div>
+
+
+        {/* LOADING NEXT PAGE */}
+
+        {isFetching && page > 1 && (
+          <div className="shop-loading-more">
+            Loading more products...
+          </div>
+        )}
+
+        {!hasMore && products.length > 0 && (
+          <div className="shop-end-message">
+            No more products
+          </div>
+        )}
+
+      </main>
+
     </div>
   );
 };

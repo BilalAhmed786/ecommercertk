@@ -1,0 +1,686 @@
+/* =========================================================
+   FORGOT PASSWORD PAGE
+========================================================= */
+
+.forgot-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 40px 20px;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      #eff6ff 0%,
+      #f8fafc 40%,
+      #ffffff 100%
+    );
+}
+
+.forgot-overlay {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.forgot-container {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+.forgot-card {
+  width: 100%;
+  min-height: 570px;
+
+  display: grid;
+  grid-template-columns: 42% 58%;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid #e6eaf0;
+  border-radius: 24px;
+
+  box-shadow:
+    0 25px 60px rgba(16, 24, 40, 0.12),
+    0 8px 25px rgba(16, 24, 40, 0.05);
+}
+
+
+/* =========================================================
+   LEFT BRANDING
+========================================================= */
+
+.forgot-brand {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      #2563eb 0%,
+      #1d4ed8 55%,
+      #1e40af 100%
+    );
+
+  color: #ffffff;
+}
+
+.forgot-brand::before {
+  content: "";
+
+  position: absolute;
+
+  width: 280px;
+  height: 280px;
+
+  top: -120px;
+  right: -100px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 50%;
+}
+
+.forgot-brand::after {
+  content: "";
+
+  position: absolute;
+
+  width: 350px;
+  height: 350px;
+
+  bottom: -220px;
+  left: -180px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 50%;
+}
+
+.forgot-brand-content {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+
+  padding: 55px;
+}
+
+.forgot-brand-logo {
+  width: 64px;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 28px;
+
+  background: rgba(255, 255, 255, 0.14);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  border-radius: 18px;
+
+  font-size: 30px;
+
+  backdrop-filter: blur(10px);
+}
+
+.forgot-brand h1 {
+  margin: 0 0 20px;
+
+  font-family: sans-serif;
+
+  font-size: 38px;
+  font-weight: 800;
+
+  line-height: 1.15;
+
+  letter-spacing: -1px;
+}
+
+.forgot-brand p {
+  max-width: 390px;
+
+  margin: 0 0 35px;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-family: sans-serif;
+
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.forgot-features {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+.forgot-features div {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  color: rgba(255, 255, 255, 0.92);
+
+  font-family: sans-serif;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.forgot-features span {
+  width: 22px;
+  height: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.16);
+
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   RIGHT CONTENT
+========================================================= */
+
+.forgot-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  padding: 55px 65px;
+}
+
+.forgot-header {
+  margin-bottom: 30px;
+}
+
+.forgot-welcome {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #2563eb;
+
+  font-family: sans-serif;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+}
+
+.forgot-header h2 {
+  margin: 0 0 8px;
+
+  color: #101828;
+
+  font-family: sans-serif;
+
+  font-size: 27px;
+  font-weight: 700;
+
+  line-height: 1.25;
+}
+
+.forgot-header p {
+  max-width: 480px;
+
+  margin: 0;
+
+  color: #667085;
+
+  font-family: sans-serif;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.forgot-field {
+  margin-bottom: 22px;
+}
+
+.forgot-field label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #344054;
+
+  font-family: sans-serif;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.forgot-input {
+  width: 100%;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  border: 1px solid #dfe4ea;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.forgot-input:focus-within {
+  border-color: #2563eb;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.forgot-input-icon {
+  width: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  color: #98a2b3;
+
+  font-size: 16px;
+}
+
+.forgot-input input {
+  width: 100%;
+  height: 100%;
+
+  border: none;
+  outline: none;
+
+  padding: 0 15px 0 0;
+
+  box-sizing: border-box;
+
+  background: transparent;
+
+  color: #101828;
+
+  font-family: sans-serif;
+
+  font-size: 13px;
+}
+
+.forgot-input input::placeholder {
+  color: #98a2b3;
+}
+
+.forgot-input input:-webkit-autofill,
+.forgot-input input:-webkit-autofill:hover,
+.forgot-input input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #101828;
+
+  transition:
+    background-color 5000s ease-in-out 0s;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.forgot-button {
+  width: 100%;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 8px;
+
+  padding: 0 18px 0 20px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #2563eb;
+
+  color: #ffffff;
+
+  font-family: sans-serif;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.forgot-button:hover {
+  background: #1d4ed8;
+
+  box-shadow:
+    0 8px 20px rgba(37, 99, 235, 0.22);
+
+  transform: translateY(-1px);
+}
+
+.forgot-button:active {
+  transform: scale(0.99);
+}
+
+.forgot-button-arrow {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  font-size: 17px;
+
+  transition: transform 0.2s ease;
+}
+
+.forgot-button:hover .forgot-button-arrow {
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   LOGIN LINK
+========================================================= */
+
+.forgot-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  margin-top: 24px;
+
+  font-family: sans-serif;
+
+  font-size: 12px;
+}
+
+.forgot-back span {
+  color: #667085;
+}
+
+.forgot-back a {
+  color: #2563eb;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.forgot-back a:hover {
+  color: #1d4ed8;
+
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   SECURITY
+========================================================= */
+
+.forgot-security {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  margin-top: 22px;
+
+  color: #98a2b3;
+
+  font-family: sans-serif;
+
+  font-size: 10px;
+}
+
+.forgot-security span:first-child {
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .forgot-page {
+    padding: 30px 18px;
+  }
+
+  .forgot-card {
+    grid-template-columns: 38% 62%;
+  }
+
+  .forgot-brand-content {
+    padding: 40px;
+  }
+
+  .forgot-brand h1 {
+    font-size: 32px;
+  }
+
+  .forgot-brand p {
+    font-size: 13px;
+  }
+
+  .forgot-content {
+    padding: 45px 40px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .forgot-page {
+    min-height: 100vh;
+
+    padding: 25px 15px;
+
+    align-items: center;
+  }
+
+  .forgot-card {
+    display: block;
+
+    min-height: auto;
+
+    border-radius: 20px;
+  }
+
+  .forgot-brand {
+    display: none;
+  }
+
+  .forgot-content {
+    width: 100%;
+
+    padding: 42px 25px;
+  }
+
+  .forgot-header {
+    margin-bottom: 25px;
+  }
+
+  .forgot-header h2 {
+    font-size: 24px;
+  }
+
+  .forgot-header p {
+    font-size: 12px;
+  }
+
+  .forgot-input {
+    height: 48px;
+  }
+
+  .forgot-button {
+    height: 49px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .forgot-page {
+    padding: 20px 10px;
+  }
+
+  .forgot-card {
+    border-radius: 17px;
+  }
+
+  .forgot-content {
+    padding: 32px 18px;
+  }
+
+  .forgot-welcome {
+    font-size: 10px;
+  }
+
+  .forgot-header h2 {
+    font-size: 22px;
+  }
+
+  .forgot-header p {
+    font-size: 11px;
+  }
+
+  .forgot-field label {
+    font-size: 11px;
+  }
+
+  .forgot-input {
+    height: 46px;
+
+    border-radius: 9px;
+  }
+
+  .forgot-input input {
+    font-size: 12px;
+  }
+
+  .forgot-input-icon {
+    width: 40px;
+
+    font-size: 14px;
+  }
+
+  .forgot-button {
+    height: 47px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+  }
+
+  .forgot-back {
+    font-size: 11px;
+  }
+
+  .forgot-security {
+    font-size: 9px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL DEVICES
+========================================================= */
+
+@media (max-width: 340px) {
+
+  .forgot-page {
+    padding: 15px 8px;
+  }
+
+  .forgot-content {
+    padding: 27px 15px;
+  }
+
+  .forgot-header {
+    margin-bottom: 20px;
+  }
+
+  .forgot-header h2 {
+    font-size: 20px;
+  }
+
+  .forgot-field {
+    margin-bottom: 17px;
+  }
+
+  .forgot-input {
+    height: 44px;
+  }
+
+  .forgot-button {
+    height: 45px;
+  }
+}

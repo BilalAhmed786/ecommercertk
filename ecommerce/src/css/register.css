@@ -1,0 +1,645 @@
+/* =========================================================
+   REGISTRATION PAGE
+========================================================= */
+
+.registration-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 40px 20px;
+  background:
+    radial-gradient(
+      circle at top left,
+      #eff6ff 0%,
+      #f8fafc 40%,
+      #ffffff 100%
+    );
+}
+
+.registration-overlay {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.registration-container {
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   REGISTRATION CARD
+========================================================= */
+
+.registration-card {
+  width: 100%;
+  min-height: 650px;
+  display: grid;
+  grid-template-columns: 42% 58%;
+  overflow: hidden;
+
+  background: #ffffff;
+  border: 1px solid #e6eaf0;
+  border-radius: 24px;
+
+  box-shadow:
+    0 25px 60px rgba(16, 24, 40, 0.12),
+    0 8px 25px rgba(16, 24, 40, 0.05);
+}
+
+/* =========================================================
+   LEFT BRANDING
+========================================================= */
+
+.registration-brand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      #2563eb 0%,
+      #1d4ed8 55%,
+      #1e40af 100%
+    );
+
+  color: #ffffff;
+}
+
+.registration-brand::before {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  top: -120px;
+  right: -100px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+}
+
+.registration-brand::after {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  bottom: -220px;
+  left: -180px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.registration-brand-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 55px;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   BRAND LOGO
+========================================================= */
+
+.registration-brand-logo {
+  width: 64px;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 28px;
+
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 18px;
+
+  font-size: 30px;
+
+  backdrop-filter: blur(10px);
+}
+
+/* =========================================================
+   BRAND TEXT
+========================================================= */
+
+.registration-brand h1 {
+  margin: 0 0 20px;
+
+  font-family: sans-serif;
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1px;
+}
+
+.registration-brand p {
+  max-width: 390px;
+  margin: 0 0 35px;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-family: sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.registration-features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.registration-features div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  color: rgba(255, 255, 255, 0.92);
+
+  font-family: sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.registration-features span {
+  width: 22px;
+  height: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+
+  font-size: 12px;
+}
+
+/* =========================================================
+   REGISTRATION CONTENT
+========================================================= */
+
+.registration-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 55px 65px;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.registration-header {
+  margin-bottom: 28px;
+}
+
+.registration-welcome {
+  display: block;
+  margin-bottom: 8px;
+
+  color: #2563eb;
+
+  font-family: sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.registration-header h2 {
+  margin: 0 0 8px;
+
+  color: #101828;
+
+  font-family: sans-serif;
+  font-size: 27px;
+  font-weight: 750;
+  line-height: 1.25;
+}
+
+.registration-header p {
+  margin: 0;
+
+  color: #667085;
+
+  font-family: sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   FORM FIELD
+========================================================= */
+
+.registration-field {
+  margin-bottom: 17px;
+}
+
+.registration-field label {
+  display: block;
+  margin-bottom: 7px;
+
+  color: #344054;
+
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.registration-input {
+  width: 100%;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  border: 1px solid #dfe4ea;
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.registration-input:focus-within {
+  border-color: #2563eb;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.registration-input-icon {
+  width: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  color: #98a2b3;
+  font-size: 15px;
+}
+
+.registration-input input {
+  width: 100%;
+  height: 100%;
+
+  border: none;
+  outline: none;
+
+  padding: 0 14px 0 0;
+
+  box-sizing: border-box;
+
+  background: transparent;
+
+  color: #101828;
+
+  font-family: sans-serif;
+  font-size: 13px;
+}
+
+.registration-input input::placeholder {
+  color: #98a2b3;
+}
+
+.registration-input input:-webkit-autofill,
+.registration-input input:-webkit-autofill:hover,
+.registration-input input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #101828;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* =========================================================
+   REGISTER BUTTON
+========================================================= */
+
+.registration-button {
+  width: 100%;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 8px;
+  padding: 0 18px 0 20px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #2563eb;
+  color: #ffffff;
+
+  font-family: sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.registration-button:hover {
+  background: #1d4ed8;
+
+  box-shadow:
+    0 8px 20px rgba(37, 99, 235, 0.22);
+
+  transform: translateY(-1px);
+}
+
+.registration-button:active {
+  transform: scale(0.99);
+}
+
+.registration-button-arrow {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 7px;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  font-size: 17px;
+
+  transition: transform 0.2s ease;
+}
+
+.registration-button:hover .registration-button-arrow {
+  transform: translateX(3px);
+}
+
+/* =========================================================
+   LOGIN LINK
+========================================================= */
+
+.registration-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  margin-top: 22px;
+
+  font-family: sans-serif;
+  font-size: 12px;
+}
+
+.registration-login span {
+  color: #667085;
+}
+
+.registration-login a {
+  color: #2563eb;
+
+  font-weight: 700;
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+.registration-login a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* =========================================================
+   SECURITY
+========================================================= */
+
+.registration-security {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  margin-top: 20px;
+
+  color: #98a2b3;
+
+  font-family: sans-serif;
+  font-size: 10px;
+}
+
+.registration-security span:first-child {
+  font-size: 12px;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .registration-page {
+    padding: 30px 18px;
+  }
+
+  .registration-card {
+    grid-template-columns: 38% 62%;
+  }
+
+  .registration-brand-content {
+    padding: 40px;
+  }
+
+  .registration-brand h1 {
+    font-size: 32px;
+  }
+
+  .registration-brand p {
+    font-size: 13px;
+  }
+
+  .registration-content {
+    padding: 45px 40px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+  .registration-page {
+    min-height: 100vh;
+    padding: 25px 15px;
+    align-items: center;
+  }
+
+  .registration-card {
+    display: block;
+    min-height: auto;
+    border-radius: 20px;
+  }
+
+  /* Hide branding on mobile */
+
+  .registration-brand {
+    display: none;
+  }
+
+  .registration-content {
+    width: 100%;
+    padding: 38px 25px;
+  }
+
+  .registration-header {
+    margin-bottom: 25px;
+  }
+
+  .registration-header h2 {
+    font-size: 24px;
+  }
+
+  .registration-header p {
+    font-size: 12px;
+  }
+
+  .registration-field {
+    margin-bottom: 15px;
+  }
+
+  .registration-input {
+    height: 47px;
+  }
+
+  .registration-button {
+    height: 49px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .registration-page {
+    padding: 20px 10px;
+  }
+
+  .registration-card {
+    border-radius: 17px;
+  }
+
+  .registration-content {
+    padding: 30px 18px;
+  }
+
+  .registration-welcome {
+    font-size: 10px;
+  }
+
+  .registration-header h2 {
+    font-size: 22px;
+  }
+
+  .registration-header p {
+    font-size: 11px;
+  }
+
+  .registration-field label {
+    font-size: 11px;
+  }
+
+  .registration-input {
+    height: 46px;
+    border-radius: 9px;
+  }
+
+  .registration-input input {
+    font-size: 12px;
+  }
+
+  .registration-input-icon {
+    width: 40px;
+    font-size: 14px;
+  }
+
+  .registration-button {
+    height: 47px;
+    border-radius: 9px;
+    font-size: 12px;
+  }
+
+  .registration-login {
+    font-size: 11px;
+  }
+
+  .registration-security {
+    font-size: 9px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 340px) {
+
+  .registration-page {
+    padding: 15px 8px;
+  }
+
+  .registration-content {
+    padding: 25px 15px;
+  }
+
+  .registration-header {
+    margin-bottom: 20px;
+  }
+
+  .registration-header h2 {
+    font-size: 20px;
+  }
+
+  .registration-field {
+    margin-bottom: 13px;
+  }
+
+  .registration-input {
+    height: 44px;
+  }
+
+  .registration-button {
+    height: 45px;
+  }
+}

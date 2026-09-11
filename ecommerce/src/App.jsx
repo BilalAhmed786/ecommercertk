@@ -1,6 +1,9 @@
 import './App.css';
 import './admin/css/common.css'
 import './css/header.css'
+import './css/login.css'
+import './css/register.css'
+import './css/forget.css'
 import './css/shoppage.css'
 import './css/cart.css'
 import './css/about.css'

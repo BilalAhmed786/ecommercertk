@@ -1,11 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useLoginUserMutation, useUserDetailsMutation } from '../app/apiauth';
+import {
+  useLoginUserMutation,
+  useUserDetailsMutation,
+} from '../app/apiauth';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 function Login() {
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
+
   const [loginuser] = useLoginUserMutation();
   const [userData] = useUserDetailsMutation();
 
@@ -14,19 +18,23 @@ function Login() {
     password: '',
   });
 
-  const handleCaptchaChange = () => {
-    setIsCaptchaVerified(true);
+  const handleCaptchaChange = (value) => {
+    setIsCaptchaVerified(!!value);
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setLogin((prev) => ({ ...prev, [name]: value }));
+
+    setLogin((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-   if (!login.email || !login.password) {
+    if (!login.email || !login.password) {
       toast.error('Email and password are required');
       return;
     }
@@ -38,13 +46,14 @@ function Login() {
 
     try {
       const response = await loginuser(login);
-
       const resData = response?.data;
 
       if (resData?.error) {
         toast.error(resData.error);
         return;
       }
+
+      await userData();
 
       if (resData?.role === 'admin') {
         window.location.href = '/dashboard';
@@ -53,72 +62,172 @@ function Login() {
       } else {
         toast.error('Invalid role');
       }
-
-      await userData(); // For global context (if needed)
-
     } catch (err) {
       toast.error('Login failed');
     }
   };
 
-
   return (
-    <section className="vh-100 d-flex align-items-center justify-content-center bg-light">
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-            <div className="card shadow">
-              <div className="card-body p-4">
-                <h2 className="text-center mb-4">Login</h2>
+    <section className="login-page">
+      <div className="login-overlay">
 
-                <form onSubmit={handleSubmit}>
-                  <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Your Email</label>
+        <div className="login-container">
+
+          <div className="login-card">
+
+            {/* Left Branding Section */}
+            <div className="login-brand">
+
+              <div className="brand-content">
+                <div className="brand-logo">
+                  🛍️
+                </div>
+
+                <h1>
+                  Shop Smarter.
+                  <br />
+                  Live Better.
+                </h1>
+
+                <p>
+                  Discover amazing products, exclusive deals
+                  and everything you need in one place.
+                </p>
+
+                <div className="brand-features">
+                  <div>
+                    <span>✓</span>
+                    Secure shopping
+                  </div>
+
+                  <div>
+                    <span>✓</span>
+                    Fast delivery
+                  </div>
+
+                  <div>
+                    <span>✓</span>
+                    Trusted service
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Login Section */}
+            <div className="login-content">
+
+              <div className="login-header">
+
+                <span className="welcome-text">
+                  WELCOME BACK
+                </span>
+
+                <h2>Sign in to your account</h2>
+
+                <p>
+                  Enter your details below to continue.
+                </p>
+
+              </div>
+
+              <form onSubmit={handleSubmit}>
+
+                {/* Email */}
+                <div className="login-field">
+
+                  <label htmlFor="email">
+                    Email Address
+                  </label>
+
+                  <div className="login-input">
+
+                    <span className="input-icon">
+                      ✉
+                    </span>
+
                     <input
+                      id="email"
                       type="email"
                       name="email"
+                      value={login.email}
                       autoComplete="username"
-                      className="form-control form-control-lg"
+                      placeholder="Enter your email"
                       onChange={handleChange}
                       required
                     />
+
                   </div>
 
-                  <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Password</label>
+                </div>
+
+                {/* Password */}
+                <div className="login-field">
+
+                  <div className="password-label">
+                    <label htmlFor="password">
+                      Password
+                    </label>
+
+                    <Link to="/Forget-password">
+                      Forgot password?
+                    </Link>
+                  </div>
+
+                  <div className="login-input">
+
+                    <span className="input-icon">
+                      🔒
+                    </span>
+
                     <input
+                      id="password"
                       type="password"
                       name="password"
+                      value={login.password}
                       autoComplete="current-password"
-                      className="form-control form-control-lg"
+                      placeholder="Enter your password"
                       onChange={handleChange}
                       required
                     />
+
                   </div>
 
-                  <div className="recaptchacontain">
-                    <ReCAPTCHA
-                      sitekey="6LdmnpgrAAAAADTs17lZXUjIddY9oH5BGozYTdbK"
-                      onChange={handleCaptchaChange}
-                      
-                    />
-                  </div>
+                </div>
 
-                  <div className="d-grid">
-                    <button type="submit" className="btn btn-danger">Login</button>
-                  </div>
+                {/* CAPTCHA */}
+                <div className="captcha-box">
+                  <ReCAPTCHA
+                    sitekey="6LdmnpgrAAAAADTs17lZXUjIddY9oH5BGozYTdbK"
+                    onChange={handleCaptchaChange}
+                  />
+                </div>
 
-                  <p className="text-center text-muted mt-4 mb-0">
-                    Forget your password?{' '}
-                    <Link to="/Forget-password" className="fw-bold text-decoration-none">
-                      Reset here
-                    </Link>
-                  </p>
-                </form>
+                {/* Login Button */}
+                <button
+                  type="submit"
+                  className="login-button"
+                >
+                  <span>Sign In</span>
+
+                  <span className="button-arrow">
+                    →
+                  </span>
+                </button>
+
+              </form>
+
+              <div className="login-security">
+                <span>🔐</span>
+                <span>Your information is securely protected</span>
               </div>
+
             </div>
+
           </div>
+
         </div>
+
       </div>
     </section>
   );
