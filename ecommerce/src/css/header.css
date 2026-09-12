@@ -45,7 +45,7 @@
 }
 
 .site-logo {
-  width: 72px;
+  width: 50px;
   height: auto;
   display: block;
   object-fit: contain;
@@ -59,15 +59,32 @@
 /* =========================================================
    USER BUTTON
 ========================================================= */
+.header-user-area {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
 
+.dropdownuser a {
+  display: block;
+  padding: 11px 12px;
+  border-radius: 8px;
+  color: #344054;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.dropdownuser a:hover {
+  background: #eff6ff;
+  color: #2563eb;
+}
 .userbutton {
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  padding: 0;
   border: 1px solid #e3e8ef;
   border-radius: 50%;
   background: #f8fafc;
@@ -497,7 +514,7 @@
   }
 
   .site-logo {
-    width: 68px;
+    width: 50px;
   }
 
   /* Cart right */
@@ -578,7 +595,7 @@
   }
 
   .site-logo {
-    width: 62px;
+    width: 50px;
   }
 
   /* Cart right */
@@ -655,7 +672,7 @@
   /* Logo */
 
   .site-logo {
-    width: 57px;
+    width: 50px;
   }
 
   /* Hamburger */
@@ -718,7 +735,7 @@
   /* Logo */
 
   .site-logo {
-    width: 52px;
+    width: 50px;
   }
 
   /* Hamburger */

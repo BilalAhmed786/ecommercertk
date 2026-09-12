@@ -1,71 +1,124 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useLogoutUserMutation } from '../../app/apiauth'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faMapMarkerAlt, faClipboardList, faUserCog, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import { useAllOrdersforclientQuery } from '../../app/apiorders';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useLogoutUserMutation } from "../../app/apiauth";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBars,
+  faMapMarkerAlt,
+  faClipboardList,
+  faUserCog,
+  faSignOutAlt,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Sidebarmenu() {
-  const [search, searchItem] = useState('')
-
-  const { data: allorders, isLoading, refetch: ordersRec } = useAllOrdersforclientQuery(search)
+  const [isOpen, setIsOpen] = useState(false);
 
   const [logoutuser] = useLogoutUserMutation();
 
   const navigate = useNavigate();
 
-
   const Logout = async () => {
-
-
     try {
-
-
       await logoutuser();
-
-      localStorage.removeItem('user')
-      
-      navigate('/login')
-
+      localStorage.removeItem("user");
+      setIsOpen(false);
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
     }
-
-    catch (error) {
-
-      console.log(error)
-
-    }
-  }
-
-  //toggle sidebar menu
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openSidebar = () => {
-    setIsOpen(true);
   };
-  const closeSidebar = () => {
 
+  const closeSidebar = () => {
     setIsOpen(false);
   };
 
   return (
-    <div className='leftsidebarmenu'>
-      <div><button className='dashmenu' onClick={openSidebar}><FontAwesomeIcon icon={faBars} /></button></div>
-      <div className={`sidebar ${isOpen ? 'open' : 'close'}`}>
-        <div><button className='btncloseside' onClick={closeSidebar}>x</button></div>
-        <div className="no-marker clintmenu">
-          <ul>
+    <div className="leftsidebarmenu">
+      {/* Menu Button */}
+      <button
+        type="button"
+        className="dashmenu"
+        onClick={() => setIsOpen(true)}
+        aria-label="Open menu"
+      >
+        <FontAwesomeIcon icon={faBars} />
+      </button>
 
-            <li className='menudashboard'><FontAwesomeIcon style={{ color: 'red' }} icon={faMapMarkerAlt} /><Link className='menuitems' to='/billingaddress'>Billing Address</Link></li>
-            <li className='menudashboard'><FontAwesomeIcon style={{ color: 'red' }} icon={faClipboardList} /><Link className='menuitems' to='/clientorders'>Orders</Link></li>
-            <li className='menudashboard'><FontAwesomeIcon style={{ color: 'red' }} icon={faUserCog} /><Link className='menuitems' to='/Profile'>Account details</Link></li>
-            <li className='menudashboard'><FontAwesomeIcon style={{ color: 'red' }} icon={faSignOutAlt} /><Link className='menuitems' to='/logout' onClick={Logout}>Logout</Link></li>
+      {/* Overlay */}
+      {isOpen && (
+        <div
+          className="sidebar-overlay"
+          onClick={closeSidebar}
+          aria-hidden="true"
+        />
+      )}
 
-          </ul>
+      {/* Sidebar */}
+      <aside className={`sidebar ${isOpen ? "open" : ""}`}>
+        <div className="sidebar-header">
+          <div>
+            <h3>My Account</h3>
+            <span>Manage your account</span>
+          </div>
+
+          <button
+            type="button"
+            className="btncloseside"
+            onClick={closeSidebar}
+            aria-label="Close menu"
+          >
+            <FontAwesomeIcon icon={faXmark} />
+          </button>
         </div>
-      </div>
-    </div>
-  )
 
+        <nav className="clintmenu">
+          <ul>
+            <li>
+              <Link to="/billingaddress" onClick={closeSidebar}>
+                <span className="client-menu-icon address-icon">
+                  <FontAwesomeIcon icon={faMapMarkerAlt} />
+                </span>
+                <span>Billing Address</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/clientorders" onClick={closeSidebar}>
+                <span className="client-menu-icon orders-icon">
+                  <FontAwesomeIcon icon={faClipboardList} />
+                </span>
+                <span>Orders</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/Profile" onClick={closeSidebar}>
+                <span className="client-menu-icon account-icon">
+                  <FontAwesomeIcon icon={faUserCog} />
+                </span>
+                <span>Account Details</span>
+              </Link>
+            </li>
+
+            <li>
+              <button
+                type="button"
+                className="client-logout"
+                onClick={Logout}
+              >
+                <span className="client-menu-icon logout-icon">
+                  <FontAwesomeIcon icon={faSignOutAlt} />
+                </span>
+                <span>Logout</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+    </div>
+  );
 }
 
-export default Sidebarmenu
+export default Sidebarmenu;

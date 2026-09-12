@@ -32,6 +32,9 @@ import './admin/css/datatable.css'
 import './client/css/welcome.css'
 import './client/css/sidebarclient.css'
 import './client/css/orderreview.css'
+import './client/css/billingaddress.css'
+import './client/css/clientorder.css'
+import './client/css/clientprofile.css'
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';

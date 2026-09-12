@@ -127,7 +127,7 @@ function Product() {
         <img
           src={loaderGif}
           alt="Loading..."
-          className="product-loader-image"
+         
         />
       </div>
     );
