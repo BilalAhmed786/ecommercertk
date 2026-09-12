@@ -1,41 +1,727 @@
+/* =========================================
+   PRICE RANGE PAGE
+========================================= */
 
-.input-wrapper {
+.price-range-page {
+  min-height: 100vh;
+  background: #f5f7fb;
+  color: #172033;
+}
+
+.price-range-main {
+  width: 100%;
+  max-width: 1500px;
+  margin-left: auto;
+  padding: 35px 45px 70px;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.price-range-header {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 30px;
 }
 
-.input-box {
-  flex: 1;
-  padding: 8px 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-
-
-.btn.add {
-  background: #28a745;
-  color: white;
-}
-
-
-.action-buttons {
+.price-range-breadcrumb {
   display: flex;
+  align-items: center;
   gap: 8px;
-  color:red;
+  color: #94a3b8;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.price-range-breadcrumb strong {
+  color: #64748b;
+}
+
+.price-range-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.price-range-title-icon {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  border-radius: 15px;
+  background: #eef2ff;
+  color: #4f46e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e0e7ff;
+}
+
+.price-range-title h1 {
+  margin: 0;
+  font-size: 29px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  color: #111827;
+}
+
+.price-range-title p {
+  margin: 6px 0 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.price-range-total-card {
+  min-width: 155px;
+  padding: 15px 18px;
+  border-radius: 15px;
+  background: white;
+  border: 1px solid #e7eaf0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 5px 20px rgba(15, 23, 42, 0.035);
+}
+
+.price-range-total-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.price-range-total-card span {
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.price-range-total-card strong {
+  color: #111827;
+  font-size: 22px;
+}
+
+.price-range-total-card svg {
+  color: #6366f1;
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.price-range-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+/* =========================================
+   FORM CARD
+========================================= */
+
+.price-range-form-card {
+  background: white;
+  border: 1px solid #e7eaf0;
+  border-radius: 18px;
+  box-shadow: 0 5px 25px rgba(15, 23, 42, 0.04);
+  overflow: hidden;
+}
+
+.price-range-form-card.editing {
+  border-color: #c7d2fe;
+  box-shadow: 0 8px 30px rgba(79, 70, 229, 0.08);
+}
+
+.price-range-form-header {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 21px 25px;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.price-range-form-icon {
+  width: 43px;
+  height: 43px;
+  border-radius: 12px;
+  background: #eef2ff;
+  color: #4f46e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.price-range-form-icon.edit {
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.price-range-form-header h2 {
+  margin: 0;
+  font-size: 16px;
+  color: #172033;
+  font-weight: 750;
+}
+
+.price-range-form-header p {
+  margin: 4px 0 0;
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.price-range-form-body {
+  padding: 22px 25px;
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.price-range-input-group {
+  flex: 1;
+}
+
+.price-range-input-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.price-range-input-group label span {
+  color: #ef4444;
+  margin-left: 3px;
+}
+
+.price-range-input-wrapper {
+  height: 48px;
+  position: relative;
+}
+
+.price-range-input-wrapper > svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  z-index: 1;
+}
+
+.price-range-input-wrapper input {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0 42px;
+  border: 1px solid #e2e8f0;
+  border-radius: 11px;
+  background: #fbfcfe;
+  color: #172033;
+  outline: none;
+  font-family: inherit;
+  font-size: 13px;
+  transition: 0.2s ease;
+}
+
+.price-range-input-wrapper input::placeholder {
+  color: #a8b2c1;
+}
+
+.price-range-input-wrapper input:focus {
+  background: white;
+  border-color: #818cf8;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.08);
+}
+
+.clear-range-input {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 7px;
+  background: #f1f5f9;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 }
-.edit-close{
-  background: transparent;
-  border: none;
-  outline: none;
 
+.clear-range-input:hover {
+  background: #fee2e2;
+  color: #ef4444;
 }
-.title-wraper{
+
+.price-range-input-group small {
+  display: block;
+  margin-top: 7px;
+  color: #94a3b8;
+  font-size: 10px;
+}
+
+.price-range-input-group small strong {
+  color: #64748b;
+}
+
+.price-range-form-actions {
   display: flex;
+  gap: 9px;
+}
+
+.save-range-btn,
+.cancel-range-btn {
+  height: 48px;
+  padding: 0 20px;
+  border-radius: 11px;
+  border: none;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  gap:8px
-  
+  gap: 8px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.save-range-btn {
+  color: white;
+  background: linear-gradient(
+    135deg,
+    #6366f1,
+    #4f46e5
+  );
+  box-shadow: 0 7px 18px rgba(79, 70, 229, 0.2);
+}
+
+.save-range-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 23px rgba(79, 70, 229, 0.27);
+}
+
+.save-range-btn.update {
+  background: linear-gradient(
+    135deg,
+    #f97316,
+    #ea580c
+  );
+  box-shadow: 0 7px 18px rgba(234, 88, 12, 0.18);
+}
+
+.save-range-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.cancel-range-btn {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.cancel-range-btn:hover {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+
+/* =========================================
+   SPINNER
+========================================= */
+
+.range-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: range-spin 0.7s linear infinite;
+}
+
+@keyframes range-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================
+   SEARCH TOOLBAR
+========================================= */
+
+.price-range-toolbar {
+  min-height: 75px;
+  padding: 14px 18px;
+  box-sizing: border-box;
+  border: 1px solid #e7eaf0;
+  border-radius: 16px;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.price-range-search-title {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.price-range-search-title > svg {
+  color: #6366f1;
+}
+
+.price-range-search-title h3 {
+  margin: 0;
+  font-size: 14px;
+  color: #172033;
+}
+
+.price-range-search-title span {
+  display: block;
+  margin-top: 3px;
+  color: #94a3b8;
+  font-size: 10px;
+}
+
+.price-range-search {
+  width: 280px;
+  position: relative;
+}
+
+.price-range-search > svg {
+  display: none;
+}
+
+
+/* =========================================
+   SELECTED TOOLBAR
+========================================= */
+
+.selected-range-toolbar {
+  min-height: 65px;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  border: 1px solid #e7eaf0;
+  border-radius: 15px;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  transition: 0.2s ease;
+}
+
+.selected-range-toolbar.active {
+  background: #fafaff;
+  border-color: #ddd6fe;
+}
+
+.selected-range-info {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.selected-range-count {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #f1f5f9;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.selected-range-toolbar.active .selected-range-count {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.selected-range-info strong {
+  display: block;
+  color: #334155;
+  font-size: 12px;
+}
+
+.selected-range-info span {
+  display: block;
+  margin-top: 2px;
+  color: #94a3b8;
+  font-size: 10px;
+}
+
+.delete-selected-range-btn {
+  height: 38px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 9px;
+  background: #fee2e2;
+  color: #dc2626;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.delete-selected-range-btn:hover:not(:disabled) {
+  background: #fecaca;
+}
+
+.delete-selected-range-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+
+/* =========================================
+   TABLE CARD
+========================================= */
+
+.price-range-table-card {
+  background: white;
+  border: 1px solid #e7eaf0;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 5px 25px rgba(15, 23, 42, 0.035);
+}
+
+.price-range-table-header {
+  min-height: 78px;
+  padding: 16px 22px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #edf0f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.price-range-table-header h3 {
+  margin: 0;
+  color: #172033;
+  font-size: 15px;
+}
+
+.price-range-table-header p {
+  margin: 4px 0 0;
+  color: #94a3b8;
+  font-size: 10px;
+}
+
+.table-count-badge {
+  padding: 7px 11px;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.price-range-table {
+  width: 100%;
+}
+
+
+/* =========================================
+   TABLE CONTENT
+========================================= */
+
+.price-range-value {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.range-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: #eef2ff;
+  color: #6366f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.price-range-value strong {
+  display: block;
+  color: #334155;
+  font-size: 13px;
+}
+
+.price-range-value span {
+  display: block;
+  margin-top: 2px;
+  color: #94a3b8;
+  font-size: 9px;
+}
+
+.range-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 9px;
+  border-radius: 7px;
+  background: #ecfdf5;
+  color: #059669;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.range-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.range-action-buttons button {
+  width: 33px;
+  height: 33px;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.range-edit-btn {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.range-edit-btn:hover {
+  background: #e0e7ff;
+}
+
+.range-delete-btn {
+  background: #fef2f2;
+  color: #ef4444;
+}
+
+.range-delete-btn:hover {
+  background: #fee2e2;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1050px) {
+  .price-range-main {
+    padding: 30px;
+  }
+
+  .price-range-form-body {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .price-range-form-actions {
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 700px) {
+  .price-range-main {
+    padding: 22px 15px 50px;
+  }
+
+  .price-range-header {
+    align-items: flex-start;
+  }
+
+  .price-range-title-icon {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+  }
+
+  .price-range-title h1 {
+    font-size: 23px;
+  }
+
+  .price-range-title p {
+    font-size: 11px;
+  }
+
+  .price-range-total-card {
+    display: none;
+  }
+
+  .price-range-form-header {
+    padding: 18px;
+  }
+
+  .price-range-form-body {
+    padding: 18px;
+  }
+
+  .price-range-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .price-range-search {
+    width: 100%;
+  }
+
+  .selected-range-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .delete-selected-range-btn {
+    justify-content: center;
+  }
+
+  .price-range-table-header {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .price-range-title-icon {
+    display: none;
+  }
+
+  .price-range-title h1 {
+    font-size: 21px;
+  }
+
+  .price-range-form-actions {
+    flex-direction: column;
+  }
+
+  .save-range-btn,
+  .cancel-range-btn {
+    width: 100%;
+  }
+
+  .price-range-form-card,
+  .price-range-table-card {
+    border-radius: 14px;
+  }
+
+  .selected-range-info {
+    align-items: flex-start;
+  }
 }

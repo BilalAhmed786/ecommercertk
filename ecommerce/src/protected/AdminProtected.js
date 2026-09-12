@@ -27,7 +27,7 @@ function Protected({ Component }) {
     };
 
     checkUser();
-  }, [navigate, fetchUserDetails]);
+  }, [navigate]);
 
   if (!userdetails) {
     return <div>...loading</div>

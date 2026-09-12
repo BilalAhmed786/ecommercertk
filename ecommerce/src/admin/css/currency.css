@@ -1,0 +1,475 @@
+/* ===============================
+   Currency Page
+================================ */
+
+.currency-page {
+  min-height: 100vh;
+  padding: 32px;
+  background: #f6f8fc;
+}
+
+.currency-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+
+/* ===============================
+   Header
+================================ */
+
+.currency-header {
+  margin-bottom: 28px;
+}
+
+.currency-header-content {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.currency-icon {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 16px;
+
+  background: linear-gradient(
+    135deg,
+    #4f46e5,
+    #7c3aed
+  );
+
+  color: #fff;
+
+  box-shadow:
+    0 10px 25px rgba(79, 70, 229, 0.2);
+}
+
+.currency-eyebrow {
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: #6366f1;
+}
+
+.currency-header h1 {
+  margin: 0;
+
+  font-size: 30px;
+  font-weight: 750;
+
+  color: #111827;
+}
+
+.currency-header p {
+  margin: 6px 0 0;
+
+  color: #6b7280;
+  font-size: 14px;
+}
+
+
+/* ===============================
+   Main Card
+================================ */
+
+.currency-card {
+  overflow: hidden;
+
+  background: #fff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+
+/* ===============================
+   Card Header
+================================ */
+
+.currency-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  padding: 26px 28px;
+
+  border-bottom: 1px solid #edf0f4;
+}
+
+.currency-card-header h2 {
+  margin: 0;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  color: #111827;
+}
+
+.currency-card-header p {
+  max-width: 620px;
+
+  margin: 7px 0 0;
+
+  color: #6b7280;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* ===============================
+   Currency Preview
+================================ */
+
+.currency-preview {
+  min-width: 120px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 14px 18px;
+
+  border-radius: 14px;
+
+  background: #f5f3ff;
+  border: 1px solid #e9e5ff;
+}
+
+.currency-preview span {
+  margin-bottom: 4px;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  color: #7c3aed;
+}
+
+.currency-preview strong {
+  font-size: 22px;
+  font-weight: 750;
+
+  color: #4f46e5;
+}
+
+
+/* ===============================
+   Form
+================================ */
+
+.currency-form {
+  padding: 30px 28px;
+}
+
+.currency-form-group {
+  max-width: 600px;
+}
+
+.currency-form-group label {
+  display: block;
+
+  margin-bottom: 9px;
+
+  font-size: 14px;
+  font-weight: 650;
+
+  color: #374151;
+}
+
+
+/* ===============================
+   Input
+================================ */
+
+.currency-input-wrapper {
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 0 16px;
+
+  border: 1px solid #dfe3ea;
+  border-radius: 12px;
+
+  background: #fff;
+
+  color: #6366f1;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.currency-input-wrapper:focus-within {
+  border-color: #6366f1;
+
+  box-shadow:
+    0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.currency-input-wrapper input {
+  width: 100%;
+  height: 100%;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  color: #111827;
+}
+
+.currency-input-wrapper input::placeholder {
+  color: #9ca3af;
+}
+
+
+/* ===============================
+   Helper Text
+================================ */
+
+.currency-form-group small {
+  display: block;
+
+  margin-top: 8px;
+
+  font-size: 12px;
+
+  color: #9ca3af;
+}
+
+.currency-error {
+  display: block;
+
+  margin-top: 7px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  color: #dc2626;
+}
+
+
+/* ===============================
+   Footer
+================================ */
+
+.currency-form-footer {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 30px;
+  padding-top: 24px;
+
+  border-top: 1px solid #edf0f4;
+}
+
+
+/* ===============================
+   Save Button
+================================ */
+
+.currency-save-btn {
+  min-width: 165px;
+  height: 46px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  border: none;
+  border-radius: 11px;
+
+  background: linear-gradient(
+    135deg,
+    #4f46e5,
+    #7c3aed
+  );
+
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 20px rgba(79, 70, 229, 0.2);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.currency-save-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 12px 25px rgba(79, 70, 229, 0.28);
+}
+
+.currency-save-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.currency-save-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+
+/* ===============================
+   Loading
+================================ */
+
+.currency-loading {
+  min-height: 220px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  background: #fff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+
+  color: #6b7280;
+
+  font-size: 14px;
+}
+
+.currency-loading-icon {
+  color: #6366f1;
+  animation: currency-spin 1s linear infinite;
+}
+
+.currency-spinner {
+  animation: currency-spin 1s linear infinite;
+}
+
+@keyframes currency-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ===============================
+   Responsive
+================================ */
+
+@media (max-width: 768px) {
+  .currency-page {
+    padding: 20px 16px;
+  }
+
+  .currency-header-content {
+    align-items: flex-start;
+  }
+
+  .currency-icon {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 14px;
+  }
+
+  .currency-header h1 {
+    font-size: 25px;
+  }
+
+  .currency-card-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .currency-preview {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .currency-preview span {
+    margin: 0;
+  }
+
+  .currency-form {
+    padding: 24px 20px;
+  }
+
+  .currency-form-group {
+    max-width: none;
+  }
+
+  .currency-form-footer {
+    justify-content: stretch;
+  }
+
+  .currency-save-btn {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .currency-page {
+    padding: 16px 12px;
+  }
+
+  .currency-header-content {
+    gap: 12px;
+  }
+
+  .currency-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .currency-header h1 {
+    font-size: 22px;
+  }
+
+  .currency-header p {
+    font-size: 12px;
+  }
+
+  .currency-card-header {
+    padding: 20px;
+  }
+
+  .currency-form {
+    padding: 20px;
+  }
+}

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faShoppingBag,
-  faUser,
-  faArrowCircleDown,
-} from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
-import { useLogoutUserMutation, useUserDetailsMutation } from "../app/apiauth";
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import {
+  ShoppingBag,
+  User,
+  ChevronDown,
+  LogOut,
+} from "lucide-react";
+
+import {
+  useLogoutUserMutation,
+  useUserDetailsMutation,
+} from "../app/apiauth";
+
 import Hamburger from "./hamburger";
 import Cartpreview from "./Cartpreview";
 import { backendurl, frontendurl } from "../baseurl/baseurl";
@@ -16,36 +20,71 @@ import { backendurl, frontendurl } from "../baseurl/baseurl";
 function Header() {
   const [refetchuser] = useUserDetailsMutation();
   const [logoutuser] = useLogoutUserMutation();
-  const totalQuantity = useSelector((state) => state.cart.cart.length);
+
+  const totalQuantity = useSelector(
+    (state) => state.cart.cart.length
+  );
+
   const [register, setRegister] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [userdata, setUserdata] = useState("");
+  const [userdata, setUserdata] = useState(null);
+
   const navigate = useNavigate();
 
-  const toggleMenu = () => setIsOpen((isOpen) => !isOpen);
-  const handleUserAuth = () => setRegister(!register);
+  const toggleMenu = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleUserAuth = () => {
+    setRegister((prev) => !prev);
+  };
 
   const handleLogoutuser = async () => {
-    const logout = await logoutuser();
+    try {
+      const logout = await logoutuser();
 
-    if (logout) {
-      navigate("/login");
+      if (logout?.data || logout) {
+        setUserdata(null);
+        setRegister(false);
+        setIsOpen(false);
+
+        navigate("/login", {
+          replace: true,
+        });
+      }
+    } catch (error) {
+      console.error("Logout error:", error);
     }
   };
 
   useEffect(() => {
-    const getuser = async () => {
-      const userdata = await refetchuser();
+    let mounted = true;
 
-      setUserdata(userdata?.data || "");
+    const getuser = async () => {
+      try {
+        const response = await refetchuser();
+
+        if (!mounted) return;
+
+        setUserdata(response?.data || null);
+      } catch (error) {
+        if (!mounted) return;
+
+        setUserdata(null);
+      }
     };
 
     getuser();
-  }, [refetchuser, userdata]);
+
+    return () => {
+      mounted = false;
+    };
+  }, [refetchuser]);
 
   return (
-    <div className="headercontainer">
+    <header className="headercontainer">
       <div className="headercontent">
+
         <div className="logocontainer">
           <div className="site-logo-contianer">
             <Link to={frontendurl}>
@@ -57,49 +96,56 @@ function Header() {
             </Link>
           </div>
 
-          <div>
+          <div className="header-user-area">
             {!userdata?.userrole ? (
               <>
-                <div className="userbutton">
-                  <FontAwesomeIcon
-                    icon={faUser}
-                    style={{ fontSize: "20px" }}
-                    onClick={handleUserAuth}
-                  />
-                  <FontAwesomeIcon
-                    icon={faArrowCircleDown}
-                    style={{ fontSize: "15px" }}
-                    onClick={handleUserAuth}
-                  />
-                </div>
-
-                <div
-                  className="dropdownuser"
-                  style={{ display: register ? "block" : "none" }}
+                <button
+                  type="button"
+                  className="userbutton"
+                  onClick={handleUserAuth}
+                  aria-label="User menu"
                 >
-                  <li>
-                    <Link to="/login" onClick={() => setRegister(false)}>
+                  <User size={20} />
+                  <ChevronDown
+                    size={16}
+                    className={
+                      register ? "user-chevron-open" : ""
+                    }
+                  />
+                </button>
+
+                {register && (
+                  <div className="dropdownuser">
+                    <Link
+                      to="/login"
+                      onClick={() => setRegister(false)}
+                    >
                       Login
                     </Link>
-                  </li>
-                  <li>
-                    <Link to="/register" onClick={() => setRegister(false)}>
+
+                    <Link
+                      to="/register"
+                      onClick={() => setRegister(false)}
+                    >
                       Register
                     </Link>
-                  </li>
-                </div>
+                  </div>
+                )}
               </>
             ) : (
-              <FontAwesomeIcon
+              <button
+                type="button"
                 className="logouticon"
                 onClick={handleLogoutuser}
-                icon={faRightFromBracket}
-              />
+                aria-label="Logout"
+              >
+                <LogOut size={19} />
+              </button>
             )}
           </div>
         </div>
 
-        <div className="navmenu">
+        <nav className="navmenu">
           <Link to="/">Shop</Link>
           <Link to="/cart">Cart</Link>
           <Link to="/checkout">Checkout</Link>
@@ -112,13 +158,21 @@ function Header() {
           {userdata?.userrole === "subscriber" && (
             <Link to="/client">Dashboard</Link>
           )}
-        </div>
+        </nav>
 
         <div className="iconcontainer">
           <div className="iconsetup">
             <Link to="/cart">
-              <FontAwesomeIcon className="carticon" icon={faShoppingBag} />
-              <span className="qunatity">{totalQuantity}</span>
+              <ShoppingBag
+                className="carticon"
+                size={21}
+              />
+
+              {totalQuantity > 0 && (
+                <span className="qunatity">
+                  {totalQuantity}
+                </span>
+              )}
             </Link>
           </div>
 
@@ -127,7 +181,6 @@ function Header() {
           </div>
         </div>
 
-        {/* IMPORTANT: Hamburger INSIDE headercontent */}
         <Hamburger
           toggleMenu={toggleMenu}
           setIsOpen={setIsOpen}
@@ -136,7 +189,7 @@ function Header() {
           handleLogoutuser={handleLogoutuser}
         />
       </div>
-    </div>
+    </header>
   );
 }
 

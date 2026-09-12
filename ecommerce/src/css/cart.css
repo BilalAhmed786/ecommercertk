@@ -1039,23 +1039,7 @@ css
   font-size: 14px;
 }
 
-/* =====================================================
-   LOADER
-===================================================== */
 
-.cart-page-loader {
-  width: 100%;
-  min-height: 550px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cart-page-loader img {
-  width: 65px;
-  height: 65px;
-  object-fit: contain;
-}
 
 /* =====================================================
    TABLET

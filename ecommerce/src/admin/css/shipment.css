@@ -1,0 +1,558 @@
+/* =================================
+   Shipment Page
+================================= */
+
+.shipment-page {
+  min-height: 100vh;
+  padding: 32px;
+  background: #f6f8fc;
+}
+
+.shipment-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+
+/* =================================
+   Header
+================================= */
+
+.shipment-header {
+  margin-bottom: 28px;
+}
+
+.shipment-header-content {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.shipment-icon {
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 16px;
+
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #4f46e5
+  );
+
+  color: #fff;
+
+  box-shadow:
+    0 10px 25px rgba(37, 99, 235, 0.2);
+}
+
+.shipment-eyebrow {
+  display: block;
+
+  margin-bottom: 4px;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: #4f46e5;
+}
+
+.shipment-header h1 {
+  margin: 0;
+
+  font-size: 30px;
+  font-weight: 750;
+
+  color: #111827;
+}
+
+.shipment-header p {
+  margin: 6px 0 0;
+
+  font-size: 14px;
+
+  color: #6b7280;
+}
+
+
+/* =================================
+   Main Card
+================================= */
+
+.shipment-card {
+  overflow: hidden;
+
+  background: #fff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+
+  box-shadow:
+    0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+
+/* =================================
+   Card Header
+================================= */
+
+.shipment-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  padding: 27px 28px;
+
+  border-bottom: 1px solid #edf0f4;
+}
+
+.shipment-card-header h2 {
+  margin: 0;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  color: #111827;
+}
+
+.shipment-card-header p {
+  max-width: 620px;
+
+  margin: 7px 0 0;
+
+  font-size: 13px;
+  line-height: 1.6;
+
+  color: #6b7280;
+}
+
+
+/* =================================
+   Preview
+================================= */
+
+.shipment-preview {
+  min-width: 145px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 14px 20px;
+
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+
+  background: #eff6ff;
+}
+
+.shipment-preview span {
+  margin-bottom: 4px;
+
+  font-size: 11px;
+  font-weight: 650;
+
+  color: #2563eb;
+}
+
+.shipment-preview strong {
+  font-size: 22px;
+  font-weight: 750;
+
+  color: #1d4ed8;
+}
+
+
+/* =================================
+   Form
+================================= */
+
+.shipment-form {
+  padding: 30px 28px;
+}
+
+.shipment-form-group {
+  max-width: 600px;
+}
+
+.shipment-form-group label {
+  display: block;
+
+  margin-bottom: 9px;
+
+  font-size: 14px;
+  font-weight: 650;
+
+  color: #374151;
+}
+
+
+/* =================================
+   Input
+================================= */
+
+.shipment-input-wrapper {
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 0 16px;
+
+  border: 1px solid #dfe3ea;
+  border-radius: 12px;
+
+  background: #fff;
+
+  color: #2563eb;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.shipment-input-wrapper:focus-within {
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+
+.shipment-input-wrapper input {
+  width: 100%;
+  height: 100%;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #111827;
+
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.shipment-input-wrapper input::placeholder {
+  color: #9ca3af;
+}
+
+
+/* =================================
+   Helper / Validation
+================================= */
+
+.shipment-form-group small {
+  display: block;
+
+  margin-top: 8px;
+
+  font-size: 12px;
+
+  color: #9ca3af;
+}
+
+.shipment-validation {
+  display: block;
+
+  margin-top: 7px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  color: #dc2626;
+}
+
+
+/* =================================
+   Form Footer
+================================= */
+
+.shipment-form-footer {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 30px;
+  padding-top: 24px;
+
+  border-top: 1px solid #edf0f4;
+}
+
+
+/* =================================
+   Save Button
+================================= */
+
+.shipment-save-btn {
+  min-width: 160px;
+  height: 46px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  border: none;
+  border-radius: 11px;
+
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #4f46e5
+  );
+
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 20px rgba(37, 99, 235, 0.2);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.shipment-save-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 12px 25px rgba(37, 99, 235, 0.28);
+}
+
+.shipment-save-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.shipment-save-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+
+/* =================================
+   Loading
+================================= */
+
+.shipment-loading {
+  min-height: 240px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  background: #fff;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+
+  color: #6b7280;
+
+  font-size: 14px;
+}
+
+.shipment-loading-icon {
+  color: #2563eb;
+
+  animation: shipment-spin 1s linear infinite;
+}
+
+
+/* =================================
+   Error
+================================= */
+
+.shipment-error {
+  min-height: 280px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  text-align: center;
+
+  background: #fff;
+
+  border: 1px solid #fee2e2;
+  border-radius: 20px;
+
+  color: #dc2626;
+}
+
+.shipment-error h3 {
+  margin: 12px 0 5px;
+
+  font-size: 18px;
+
+  color: #111827;
+}
+
+.shipment-error p {
+  margin: 0 0 20px;
+
+  font-size: 13px;
+
+  color: #6b7280;
+}
+
+.shipment-retry-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  height: 42px;
+
+  padding: 0 18px;
+
+  border: 1px solid #dbeafe;
+  border-radius: 10px;
+
+  background: #eff6ff;
+
+  color: #2563eb;
+
+  font-size: 13px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.shipment-retry-btn:hover {
+  background: #dbeafe;
+}
+
+
+/* =================================
+   Animations
+================================= */
+
+.shipment-spinner {
+  animation: shipment-spin 1s linear infinite;
+}
+
+@keyframes shipment-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =================================
+   Responsive
+================================= */
+
+@media (max-width: 768px) {
+  .shipment-page {
+    padding: 20px 16px;
+  }
+
+  .shipment-header-content {
+    align-items: flex-start;
+  }
+
+  .shipment-icon {
+    width: 50px;
+    height: 50px;
+
+    border-radius: 14px;
+  }
+
+  .shipment-header h1 {
+    font-size: 25px;
+  }
+
+  .shipment-card-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .shipment-preview {
+    width: 100%;
+
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .shipment-preview span {
+    margin: 0;
+  }
+
+  .shipment-form {
+    padding: 24px 20px;
+  }
+
+  .shipment-form-group {
+    max-width: none;
+  }
+
+  .shipment-form-footer {
+    justify-content: stretch;
+  }
+
+  .shipment-save-btn {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .shipment-page {
+    padding: 16px 12px;
+  }
+
+  .shipment-header-content {
+    gap: 12px;
+  }
+
+  .shipment-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .shipment-header h1 {
+    font-size: 22px;
+  }
+
+  .shipment-header p {
+    font-size: 12px;
+  }
+
+  .shipment-card-header {
+    padding: 20px;
+  }
+
+  .shipment-form {
+    padding: 20px;
+  }
+
+  .shipment-card-header h2 {
+    font-size: 17px;
+  }
+}

@@ -82,7 +82,7 @@ function Cart() {
 
   if (isLoading || loading) {
     return (
-      <div className="cart-page-loader">
+      <div className="shop-loader">
         <img src={loaderGif} alt="Loading..." />
       </div>
     );

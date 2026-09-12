@@ -1,0 +1,66 @@
+.reuse-data-table {
+  width: 100%;
+  max-width: 100%;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Keep the actual DataTable inside the available width */
+.reuse-data-table > div {
+  width: 100%;
+}
+
+/* =================================
+   Empty State
+================================= */
+
+.datatable-empty {
+  width: 100%;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.datatable-empty-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  border-radius: 16px;
+  background: #f1f5f9;
+  font-size: 24px;
+}
+
+.datatable-empty h3 {
+  margin: 0 0 6px;
+  color: #1e293b;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.datatable-empty p {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+/* =================================
+   Mobile
+================================= */
+
+@media (max-width: 768px) {
+  .reuse-data-table {
+    border-radius: 12px;
+    overflow-x: auto;
+  }
+}
